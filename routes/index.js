@@ -237,15 +237,16 @@ router.post('/guestsMessage', function(req, res, next) {
                                 day = "0" + day;
                             }
                             var monthNumber = job.cronTime.toString().slice(11, 12);
+                            console.log("---->>>monthnumber"+monthNumber);
 
                             var monthNames = ["Jan", "Feb", "Mar", "Apr", "May", "Jun",
                                 "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
 
                             var month = monthNames[monthNumber];
-
+                            console.log("---->>>month"+monthNumber);
                             //Filter the right message
                             var regex = String(month + " " + day + " 2017 " + hour + ":" + minutes);
-                            console.log(regex);
+                            console.log("---->regex:"+regex);
 
                             for (var m = 0; m < bufferObject.length; m++) {
                                 var rightMessage = bufferObject[m];
