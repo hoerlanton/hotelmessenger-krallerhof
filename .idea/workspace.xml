@@ -2,7 +2,25 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="31aa1f9b-f5e8-4109-bab4-a5fc224afd25" name="Default" comment="">
+      <change type="DELETED" beforePath="$PROJECT_DIR$/client/node_modules/es6-object-assign/LICENSE" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/client/node_modules/es6-object-assign/README.md" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/client/node_modules/es6-object-assign/auto.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/client/node_modules/es6-object-assign/dist/object-assign-auto.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/client/node_modules/es6-object-assign/dist/object-assign-auto.min.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/client/node_modules/es6-object-assign/dist/object-assign.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/client/node_modules/es6-object-assign/dist/object-assign.min.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/client/node_modules/es6-object-assign/index.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/client/node_modules/es6-object-assign/package.json" afterPath="" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app.js" afterPath="$PROJECT_DIR$/app.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/client/node_modules/classlist.js/package.json" afterPath="$PROJECT_DIR$/client/node_modules/classlist.js/package.json" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/client/node_modules/intl/package.json" afterPath="$PROJECT_DIR$/client/node_modules/intl/package.json" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/client/node_modules/mdn-polyfills/package.json" afterPath="$PROJECT_DIR$/client/node_modules/mdn-polyfills/package.json" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/client/node_modules/web-animations-js/package.json" afterPath="$PROJECT_DIR$/client/node_modules/web-animations-js/package.json" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/client/package-lock.json" afterPath="$PROJECT_DIR$/client/package-lock.json" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/client/package.json" afterPath="$PROJECT_DIR$/client/package.json" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/client/public/index.html" afterPath="$PROJECT_DIR$/client/public/index.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/client/src/app/components/dashboard/dashboard.component.html" afterPath="$PROJECT_DIR$/client/src/app/components/dashboard/dashboard.component.html" />
     </list>
     <ignored path="$PROJECT_DIR$/.tmp/" />
     <ignored path="$PROJECT_DIR$/temp/" />
@@ -20,7 +38,7 @@
         <entry file="file://$PROJECT_DIR$/config/default.json">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="120">
-              <caret line="8" column="0" lean-forward="true" selection-start-line="8" selection-start-column="0" selection-end-line="8" selection-end-column="0" />
+              <caret line="8" column="0" lean-forward="false" selection-start-line="8" selection-start-column="0" selection-end-line="8" selection-end-column="0" />
               <folding />
             </state>
           </provider>
@@ -31,7 +49,50 @@
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="360">
               <caret line="24" column="47" lean-forward="false" selection-start-line="24" selection-start-column="47" selection-end-line="24" selection-end-column="47" />
-              <folding />
+              <folding>
+                <marker date="1501856624000" expanded="true" signature="2025:2216" ph="..." />
+                <marker date="1501856624000" expanded="true" signature="2025:2227" ph="..." />
+                <marker date="1501856624000" expanded="true" signature="2025:2234" ph="..." />
+                <marker date="1501856624000" expanded="true" signature="2025:7442" ph="..." />
+                <marker date="1501856624000" expanded="true" signature="2324:2350" ph="..." />
+                <marker date="1501856624000" expanded="true" signature="2369:7433" ph="..." />
+                <marker date="1501856624000" expanded="true" signature="2403:7426" ph="..." />
+                <marker date="1501856624000" expanded="true" signature="2434:4046" ph="..." />
+                <marker date="1501856624000" expanded="true" signature="2491:3232" ph="..." />
+                <marker date="1501856624000" expanded="true" signature="2542:3213" ph="..." />
+                <marker date="1501856624000" expanded="false" signature="2671:2764" ph="..." />
+                <marker date="1501856624000" expanded="true" signature="2793:3163" ph="..." />
+                <marker date="1501856624000" expanded="true" signature="3289:4031" ph="..." />
+                <marker date="1501856624000" expanded="true" signature="3340:4012" ph="..." />
+                <marker date="1501856624000" expanded="false" signature="3470:3563" ph="..." />
+                <marker date="1501856624000" expanded="true" signature="3592:3962" ph="..." />
+                <marker date="1501856624000" expanded="true" signature="4078:6541" ph="..." />
+                <marker date="1501856624000" expanded="true" signature="4208:5434" ph="..." />
+                <marker date="1501856624000" expanded="false" signature="4260:4287" ph="..." />
+                <marker date="1501856624000" expanded="true" signature="4288:4955" ph="..." />
+                <marker date="1501856624000" expanded="true" signature="4338:4928" ph="..." />
+                <marker date="1501856624000" expanded="false" signature="4428:4447" ph="..." />
+                <marker date="1501856624000" expanded="true" signature="4511:4551" ph="..." />
+                <marker date="1501856624000" expanded="false" signature="4607:4652" ph="..." />
+                <marker date="1501856624000" expanded="false" signature="4764:4819" ph="..." />
+                <marker date="1501856624000" expanded="false" signature="5007:5044" ph="..." />
+                <marker date="1501856624000" expanded="true" signature="5045:5410" ph="..." />
+                <marker date="1501856624000" expanded="true" signature="5094:5383" ph="..." />
+                <marker date="1501856624000" expanded="false" signature="5202:5243" ph="..." />
+                <marker date="1501856624000" expanded="false" signature="5482:5519" ph="..." />
+                <marker date="1501856624000" expanded="true" signature="5520:6082" ph="..." />
+                <marker date="1501856624000" expanded="false" signature="5844:5902" ph="..." />
+                <marker date="1501856624000" expanded="true" signature="6164:6507" ph="..." />
+                <marker date="1501856624000" expanded="true" signature="6228:6484" ph="..." />
+                <marker date="1501856624000" expanded="true" signature="6573:7415" ph="..." />
+                <marker date="1501856624000" expanded="false" signature="6646:6671" ph="..." />
+                <marker date="1501856624000" expanded="true" signature="6672:7400" ph="..." />
+                <marker date="1501856624000" expanded="true" signature="6707:7381" ph="..." />
+                <marker date="1501856624000" expanded="false" signature="6754:6770" ph="..." />
+                <marker date="1501856624000" expanded="true" signature="6814:7358" ph="..." />
+                <marker date="1501856624000" expanded="true" signature="6921:7331" ph="..." />
+                <marker date="1501856624000" expanded="true" signature="7019:7300" ph="..." />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -39,11 +100,97 @@
       <file leaf-file-name="dashboard.component.ts" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/client/src/app/components/dashboard/dashboard.component.ts">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="180">
-              <caret line="12" column="35" lean-forward="false" selection-start-line="12" selection-start-column="35" selection-end-line="12" selection-end-column="35" />
+            <state relative-caret-position="371">
+              <caret line="103" column="0" lean-forward="false" selection-start-line="103" selection-start-column="0" selection-end-line="103" selection-end-column="0" />
               <folding>
                 <element signature="e#0#42#0" expanded="true" />
               </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="dashboard.service.ts" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/client/src/app/services/dashboard.service.ts">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="60">
+              <caret line="4" column="13" lean-forward="false" selection-start-line="4" selection-start-column="13" selection-end-line="4" selection-end-column="13" />
+              <folding>
+                <element signature="e#0#43#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="app.js" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="507">
+              <caret line="51" column="26" lean-forward="false" selection-start-line="51" selection-start-column="26" selection-end-line="51" selection-end-column="26" />
+              <folding>
+                <element signature="e#3807#4448#0" expanded="false" />
+                <element signature="e#4614#4937#0" expanded="false" />
+                <element signature="e#5256#6556#0" expanded="false" />
+                <element signature="e#6736#7288#0" expanded="false" />
+                <element signature="n#!!block;n#verifyRequestSignature#0" expanded="false" />
+                <element signature="n#!!block;n#receivedAuthentication#0" expanded="false" />
+                <element signature="n#!!block;n#postNewUserToDB#0" expanded="false" />
+                <element signature="e#12703#13671#0" expanded="false" />
+                <element signature="n#!!block;n#receivedMessage#0" expanded="false" />
+                <element signature="e#16919#17157#0" expanded="false" />
+                <element signature="e#17344#18302#0" expanded="false" />
+                <element signature="n#!!block;n#receivedDeliveryConfirmation#0" expanded="false" />
+                <element signature="n#!!block;n#receivedPostback#0" expanded="false" />
+                <element signature="n#!!block;n#receivedMessageRead#0" expanded="false" />
+                <element signature="n#!!block;n#receivedAccountLink#0" expanded="false" />
+                <element signature="n#!!block;n#sendPersonalFeedback#0" expanded="false" />
+                <element signature="n#!!block;n#sendTextMessage#0" expanded="false" />
+                <element signature="n#!!block;n#sendWelcomeMessage#0" expanded="false" />
+                <element signature="n#!!block;n#sendTypingOn#0" expanded="false" />
+                <element signature="n#!!block;n#sendTypingOff#0" expanded="false" />
+                <element signature="n#!!block;n#sendAccountLinking#0" expanded="false" />
+                <element signature="n#!!block;n#callSendAPI#0" expanded="false" />
+                <element signature="n#!!block;n#updateDB#0" expanded="false" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="package-lock.json" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/package-lock.json">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="0">
+              <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="README.md" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/README.md">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="180">
+              <caret line="12" column="32" lean-forward="false" selection-start-line="12" selection-start-column="32" selection-end-line="12" selection-end-column="32" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="CHANGELOG.md" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/CHANGELOG.md">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="0">
+              <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="package.json" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/package.json">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="135">
+              <caret line="9" column="4" lean-forward="false" selection-start-line="9" selection-start-column="4" selection-end-line="9" selection-end-column="4" />
+              <folding />
             </state>
           </provider>
         </entry>
@@ -64,9 +211,7 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/app.js" />
         <option value="$PROJECT_DIR$/client/src/app/components/dashboard/dashboard.component.css" />
-        <option value="$PROJECT_DIR$/client/src/app/components/dashboard/dashboard.component.ts" />
         <option value="$PROJECT_DIR$/client/src/app/services/dashboard.service.ts" />
         <option value="$PROJECT_DIR$/client/src/tsconfig.json" />
         <option value="$PROJECT_DIR$/client/Messages.ts" />
@@ -80,6 +225,8 @@
         <option value="$PROJECT_DIR$/client/src/app/components/dashboard/dashboard.component.html" />
         <option value="$PROJECT_DIR$/views/wlanlandingpage.ejs" />
         <option value="$PROJECT_DIR$/config/default.json" />
+        <option value="$PROJECT_DIR$/app.js" />
+        <option value="$PROJECT_DIR$/client/src/app/components/dashboard/dashboard.component.ts" />
       </list>
     </option>
   </component>
@@ -125,51 +272,6 @@
             <path>
               <item name="hotelmessenger-krallerhof" type="b2602c69:ProjectViewProjectNode" />
               <item name="hotelmessenger-krallerhof" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="hotelmessenger-krallerhof" type="b2602c69:ProjectViewProjectNode" />
-              <item name="hotelmessenger-krallerhof" type="462c0819:PsiDirectoryNode" />
-              <item name="client" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="hotelmessenger-krallerhof" type="b2602c69:ProjectViewProjectNode" />
-              <item name="hotelmessenger-krallerhof" type="462c0819:PsiDirectoryNode" />
-              <item name="client" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="hotelmessenger-krallerhof" type="b2602c69:ProjectViewProjectNode" />
-              <item name="hotelmessenger-krallerhof" type="462c0819:PsiDirectoryNode" />
-              <item name="client" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="app" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="hotelmessenger-krallerhof" type="b2602c69:ProjectViewProjectNode" />
-              <item name="hotelmessenger-krallerhof" type="462c0819:PsiDirectoryNode" />
-              <item name="client" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="app" type="462c0819:PsiDirectoryNode" />
-              <item name="components" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="hotelmessenger-krallerhof" type="b2602c69:ProjectViewProjectNode" />
-              <item name="hotelmessenger-krallerhof" type="462c0819:PsiDirectoryNode" />
-              <item name="client" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="app" type="462c0819:PsiDirectoryNode" />
-              <item name="components" type="462c0819:PsiDirectoryNode" />
-              <item name="dashboard" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="hotelmessenger-krallerhof" type="b2602c69:ProjectViewProjectNode" />
-              <item name="hotelmessenger-krallerhof" type="462c0819:PsiDirectoryNode" />
-              <item name="config" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="hotelmessenger-krallerhof" type="b2602c69:ProjectViewProjectNode" />
-              <item name="hotelmessenger-krallerhof" type="462c0819:PsiDirectoryNode" />
-              <item name="views" type="462c0819:PsiDirectoryNode" />
             </path>
           </expand>
           <select />
@@ -227,12 +329,12 @@
       <workItem from="1500540611759" duration="599000" />
       <workItem from="1500627741646" duration="4948000" />
       <workItem from="1500920501150" duration="4939000" />
-      <workItem from="1501847558510" duration="7676000" />
+      <workItem from="1501847558510" duration="9150000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="31358000" />
+    <option name="totallyTimeSpent" value="32832000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -290,22 +392,6 @@
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/app.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="4620">
-          <caret line="308" column="51" lean-forward="false" selection-start-line="308" selection-start-column="51" selection-end-line="308" selection-end-column="51" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/routes/index.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="120">
-          <caret line="8" column="27" lean-forward="true" selection-start-line="8" selection-start-column="27" selection-end-line="8" selection-end-column="27" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/README.md">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="75">
@@ -580,29 +666,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/client/src/app/services/dashboard.service.ts">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="75">
-          <caret line="5" column="31" lean-forward="true" selection-start-line="5" selection-start-column="31" selection-end-line="5" selection-end-column="31" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/package.json">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="90">
-          <caret line="6" column="27" lean-forward="true" selection-start-line="6" selection-start-column="27" selection-end-line="6" selection-end-column="27" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="4620">
-          <caret line="308" column="51" lean-forward="false" selection-start-line="308" selection-start-column="51" selection-end-line="308" selection-end-column="51" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/routes/index.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="165">
@@ -639,14 +702,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/README.md">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="180">
-          <caret line="12" column="32" lean-forward="true" selection-start-line="12" selection-start-column="32" selection-end-line="12" selection-end-column="32" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/views/wlanlandingpage.ejs">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="224">
@@ -657,26 +712,143 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/config/default.json">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="120">
-          <caret line="8" column="0" lean-forward="true" selection-start-line="8" selection-start-column="0" selection-end-line="8" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/client/src/app/components/dashboard/dashboard.component.html">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="360">
           <caret line="24" column="47" lean-forward="false" selection-start-line="24" selection-start-column="47" selection-end-line="24" selection-end-column="47" />
+          <folding>
+            <marker date="1501856624000" expanded="true" signature="2025:2216" ph="..." />
+            <marker date="1501856624000" expanded="true" signature="2025:2227" ph="..." />
+            <marker date="1501856624000" expanded="true" signature="2025:2234" ph="..." />
+            <marker date="1501856624000" expanded="true" signature="2025:7442" ph="..." />
+            <marker date="1501856624000" expanded="true" signature="2324:2350" ph="..." />
+            <marker date="1501856624000" expanded="true" signature="2369:7433" ph="..." />
+            <marker date="1501856624000" expanded="true" signature="2403:7426" ph="..." />
+            <marker date="1501856624000" expanded="true" signature="2434:4046" ph="..." />
+            <marker date="1501856624000" expanded="true" signature="2491:3232" ph="..." />
+            <marker date="1501856624000" expanded="true" signature="2542:3213" ph="..." />
+            <marker date="1501856624000" expanded="false" signature="2671:2764" ph="..." />
+            <marker date="1501856624000" expanded="true" signature="2793:3163" ph="..." />
+            <marker date="1501856624000" expanded="true" signature="3289:4031" ph="..." />
+            <marker date="1501856624000" expanded="true" signature="3340:4012" ph="..." />
+            <marker date="1501856624000" expanded="false" signature="3470:3563" ph="..." />
+            <marker date="1501856624000" expanded="true" signature="3592:3962" ph="..." />
+            <marker date="1501856624000" expanded="true" signature="4078:6541" ph="..." />
+            <marker date="1501856624000" expanded="true" signature="4208:5434" ph="..." />
+            <marker date="1501856624000" expanded="false" signature="4260:4287" ph="..." />
+            <marker date="1501856624000" expanded="true" signature="4288:4955" ph="..." />
+            <marker date="1501856624000" expanded="true" signature="4338:4928" ph="..." />
+            <marker date="1501856624000" expanded="false" signature="4428:4447" ph="..." />
+            <marker date="1501856624000" expanded="true" signature="4511:4551" ph="..." />
+            <marker date="1501856624000" expanded="false" signature="4607:4652" ph="..." />
+            <marker date="1501856624000" expanded="false" signature="4764:4819" ph="..." />
+            <marker date="1501856624000" expanded="false" signature="5007:5044" ph="..." />
+            <marker date="1501856624000" expanded="true" signature="5045:5410" ph="..." />
+            <marker date="1501856624000" expanded="true" signature="5094:5383" ph="..." />
+            <marker date="1501856624000" expanded="false" signature="5202:5243" ph="..." />
+            <marker date="1501856624000" expanded="false" signature="5482:5519" ph="..." />
+            <marker date="1501856624000" expanded="true" signature="5520:6082" ph="..." />
+            <marker date="1501856624000" expanded="false" signature="5844:5902" ph="..." />
+            <marker date="1501856624000" expanded="true" signature="6164:6507" ph="..." />
+            <marker date="1501856624000" expanded="true" signature="6228:6484" ph="..." />
+            <marker date="1501856624000" expanded="true" signature="6573:7415" ph="..." />
+            <marker date="1501856624000" expanded="false" signature="6646:6671" ph="..." />
+            <marker date="1501856624000" expanded="true" signature="6672:7400" ph="..." />
+            <marker date="1501856624000" expanded="true" signature="6707:7381" ph="..." />
+            <marker date="1501856624000" expanded="false" signature="6754:6770" ph="..." />
+            <marker date="1501856624000" expanded="true" signature="6814:7358" ph="..." />
+            <marker date="1501856624000" expanded="true" signature="6921:7331" ph="..." />
+            <marker date="1501856624000" expanded="true" signature="7019:7300" ph="..." />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/README.md">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="180">
+          <caret line="12" column="32" lean-forward="false" selection-start-line="12" selection-start-column="32" selection-end-line="12" selection-end-column="32" />
           <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/CHANGELOG.md">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/package.json">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="135">
+          <caret line="9" column="4" lean-forward="false" selection-start-line="9" selection-start-column="4" selection-end-line="9" selection-end-column="4" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/package-lock.json">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="507">
+          <caret line="51" column="26" lean-forward="false" selection-start-line="51" selection-start-column="26" selection-end-line="51" selection-end-column="26" />
+          <folding>
+            <element signature="e#3807#4448#0" expanded="false" />
+            <element signature="e#4614#4937#0" expanded="false" />
+            <element signature="e#5256#6556#0" expanded="false" />
+            <element signature="e#6736#7288#0" expanded="false" />
+            <element signature="n#!!block;n#verifyRequestSignature#0" expanded="false" />
+            <element signature="n#!!block;n#receivedAuthentication#0" expanded="false" />
+            <element signature="n#!!block;n#postNewUserToDB#0" expanded="false" />
+            <element signature="e#12703#13671#0" expanded="false" />
+            <element signature="n#!!block;n#receivedMessage#0" expanded="false" />
+            <element signature="e#16919#17157#0" expanded="false" />
+            <element signature="e#17344#18302#0" expanded="false" />
+            <element signature="n#!!block;n#receivedDeliveryConfirmation#0" expanded="false" />
+            <element signature="n#!!block;n#receivedPostback#0" expanded="false" />
+            <element signature="n#!!block;n#receivedMessageRead#0" expanded="false" />
+            <element signature="n#!!block;n#receivedAccountLink#0" expanded="false" />
+            <element signature="n#!!block;n#sendPersonalFeedback#0" expanded="false" />
+            <element signature="n#!!block;n#sendTextMessage#0" expanded="false" />
+            <element signature="n#!!block;n#sendWelcomeMessage#0" expanded="false" />
+            <element signature="n#!!block;n#sendTypingOn#0" expanded="false" />
+            <element signature="n#!!block;n#sendTypingOff#0" expanded="false" />
+            <element signature="n#!!block;n#sendAccountLinking#0" expanded="false" />
+            <element signature="n#!!block;n#callSendAPI#0" expanded="false" />
+            <element signature="n#!!block;n#updateDB#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/config/default.json">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="120">
+          <caret line="8" column="0" lean-forward="false" selection-start-line="8" selection-start-column="0" selection-end-line="8" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/client/src/app/services/dashboard.service.ts">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="60">
+          <caret line="4" column="13" lean-forward="false" selection-start-line="4" selection-start-column="13" selection-end-line="4" selection-end-column="13" />
+          <folding>
+            <element signature="e#0#43#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/client/src/app/components/dashboard/dashboard.component.ts">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="180">
-          <caret line="12" column="35" lean-forward="false" selection-start-line="12" selection-start-column="35" selection-end-line="12" selection-end-column="35" />
+        <state relative-caret-position="371">
+          <caret line="103" column="0" lean-forward="false" selection-start-line="103" selection-start-column="0" selection-end-line="103" selection-end-column="0" />
           <folding>
             <element signature="e#0#42#0" expanded="true" />
           </folding>

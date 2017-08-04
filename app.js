@@ -121,7 +121,6 @@ app.post("/upload", upload.array("uploads[]", 12), function (req, res) {
     console.log("NEWFILEUPLOAD ======= >>>> app1" +  exports.newFileUploaded);
     exports.newFileUploaded = newFileUploaded;
     console.log("NEWFILEUPLOAD ======= >>>> app2" +  exports.newFileUploaded);
-
     //console.log("New file uploaded status:" + newFileUploaded);
     //console.log("New file uploaded status:" + newFileUploaded);
     res.send(req.files);
