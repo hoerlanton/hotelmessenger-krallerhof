@@ -47,11 +47,16 @@
     "bootstrap": "file:bower_components/bootstrap",
     "bootstrap-datepicker": "file:bower_components/bootstrap-datepicker",
     "bootstrap-timepicker": "^0.5.2",
+    "classlist.js": "^1.1.20150312",
     "core-js": "^2.4.1",
+    "es6-object-assign": "^1.1.0",
+    "intl": "^1.2.5",
     "jquery": "^3.2.1",
+    "mdn-polyfills": "^4.0.0",
     "ng2-datetime": "^1.4.0",
     "rxjs": "5.0.1",
     "systemjs": "0.19.39",
+    "web-animations-js": "^2.3.1",
     "zone.js": "^0.8.14"
   },
   "devDependencies": {

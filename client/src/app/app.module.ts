@@ -9,6 +9,7 @@ import { MomentModule } from 'angular2-moment';
 import { NKDatetimeModule } from 'ng2-datetime/ng2-datetime';
 import * as $ from 'jquery';
 
+import 'mdn-polyfills/Object.assign';
 import '@angular/platform-browser';
 import '@angular/platform-browser-dynamic';
 import '@angular/core';
