@@ -1,0 +1,71 @@
+"use strict";
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+Object.defineProperty(exports, "__esModule", { value: true });
+var core_1 = require("@angular/core");
+var forms_1 = require("@angular/forms");
+var platform_browser_1 = require("@angular/platform-browser");
+var testing_1 = require("@angular/core/testing");
+var ng2_datetime_module_1 = require("./ng2-datetime.module");
+var ng2_datetime_1 = require("./ng2-datetime");
+describe('ng2-datetime', function () {
+    beforeEach(function () {
+        testing_1.TestBed.configureTestingModule({
+            imports: [forms_1.FormsModule, ng2_datetime_module_1.NKDatetimeModule],
+            declarations: [DatePickerComponent]
+        });
+    });
+    it('should instantiate', function () {
+        var component = testing_1.TestBed.createComponent(ng2_datetime_1.NKDatetime).componentInstance;
+        expect(component).not.toBeNull();
+        expect(component instanceof ng2_datetime_1.NKDatetime).toEqual(true);
+    });
+    describe('datepicker', function () {
+        it('should update ngModel when datepicker value changes', testing_1.fakeAsync(function () {
+            var fixture = testing_1.TestBed.createComponent(DatePickerComponent);
+            var component = getComponent(fixture, ng2_datetime_1.NKDatetime);
+            fixture.componentInstance.date = null;
+            tickAndDetect(fixture);
+            component.datepicker.datepicker('setDate', new Date(2011, 2, 5));
+            tickAndDetect(fixture);
+            expect(fixture.componentInstance.date).toEqual(new Date(2011, 2, 5));
+        }));
+    });
+    describe('timepicker', function () {
+        it('should update ngModel when timepicker value changes', testing_1.fakeAsync(function () {
+            var fixture = testing_1.TestBed.createComponent(DatePickerComponent);
+            var component = getComponent(fixture, ng2_datetime_1.NKDatetime);
+            fixture.componentInstance.date = new Date(2011, 2, 5, 0, 0);
+            tickAndDetect(fixture);
+            tickAndDetect(fixture);
+            component.timepicker.timepicker('setTime', '12:45 AM');
+            tickAndDetect(fixture);
+            expect(fixture.componentInstance.date).toEqual(new Date(2011, 2, 5, 0, 45));
+        }));
+    });
+});
+function getComponent(fixture, type) {
+    // tick for each component in the component tree
+    tickAndDetect(fixture);
+    tickAndDetect(fixture);
+    return fixture.debugElement.query(platform_browser_1.By.directive(type)).componentInstance;
+}
+function tickAndDetect(fixture) {
+    testing_1.tick();
+    fixture.detectChanges();
+}
+var DatePickerComponent = (function () {
+    function DatePickerComponent() {
+    }
+    return DatePickerComponent;
+}());
+DatePickerComponent = __decorate([
+    core_1.Component({
+        template: "\n        <datetime [(ngModel)]=\"date\"></datetime>\n    "
+    })
+], DatePickerComponent);
+//# sourceMappingURL=ng2-datetime.spec.js.map

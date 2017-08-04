@@ -1,0 +1,122 @@
+html, body {
+    padding: 0;
+    margin: 0;
+    height: 100%;
+    background-color: #0a7a74;
+}
+
+.row {
+    height: 100%;
+}
+
+.row .container-fluid .col-md-4 {
+    background-color: #f3efe4;
+    padding: 20px 10px 20px 10px;
+    border-left: 10px solid #0a7a74;
+    border-right: 10px solid #0a7a74;
+    height: 100%;
+    border-bottom: 40px solid #0a7a74;
+}
+
+.row .container-fluid .col-md-4 .row1 {
+    overflow: auto;
+    margin: 0 auto;
+    display: inline-block;
+    width: 100%;
+    height: 382.5px;
+    padding-top: 20px;
+}
+
+.row .container-fluid .col-md-4 .row3 {
+    margin: 0 auto;
+    display: inline-block;
+    width: 100%;
+    height: 800px;
+    padding-top: 20px;
+}
+
+
+.row .container-fluid .col-md-4 .col-xs-12 .row1 {
+    overflow: auto;
+    margin: 0 auto;
+    display: inline-block;
+    width: 100%;
+    height: 800px;
+    padding-top: 20px;
+}
+
+
+.row .container-fluid .col-md-4 h3 {
+    align-content: center;
+    margin: 0 auto;
+    display: inline-block;
+    color: #0a7a74;
+    position: relative;
+    text-align:center;
+}
+
+.row .container-fluid .col-md-4 .row3 .col-xs-12 .form-group {
+    border-top:3px solid #0a7a74;
+    width: 105%;
+    padding: 10px 10px 10px 30px;
+}
+
+.row .container-fluid .col-md-4 .row3 .col-xs-12  .group {
+    border-top:3px solid #0a7a74;
+    width: 105%;
+    padding: 10px 10px 10px 30px;
+}
+
+.row .container-fluid .col-md-4 .row3 .col-xs-12 .form-group1 {
+    margin-top: 20px;
+    overflow: auto;
+    max-height: 300px;
+    display: inline-block;
+    border-top:3px solid #0a7a74;
+    width: 102%;
+    padding: 10px 10px 10px 25px;
+}
+
+.row1 .col {
+    flex: 1;
+}
+
+.row1 .col:nth-child(1) {
+    order: 1;
+}
+.row1 .col:nth-child(2) {
+    order: 0;
+}
+.row1 .col:nth-child(3) {
+    order: 2;
+}
+
+.row .col-md-4 .row2 {
+    padding-bottom: 10px;
+    position: relative;
+    min-height: 100%;
+    border-bottom: 1px solid red;
+}
+
+.card {
+    background: rgb(255,255,255); /* Fall-back for browsers that don support rgba */
+    background: rgba(255,255,255, 1);
+}
+
+.row .container-fluid .col-md-4 .row1 .card p {
+    padding:10px 10px 10px 10px;
+}
+
+.row .container-fluid .col-md-4 .card p {
+    padding:10px 10px 10px 10px;
+}
+
+.row .container-fluid .col-md-4 .row3 .row1 p {
+    padding: 10px 10px 10px 10px;
+    background: rgb(255,255,255); /* Fall-back for browsers that don support rgba */
+    background: rgba(255,255,255, 1);
+}
+
+.row .container-fluid .col-md-4 .col-xs-12 .row1 .card p {
+    padding: 10px 10px 10px 10px;
+}

@@ -1,0 +1,116 @@
+<html>
+<head>
+    <title>Dashboard</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-1.12.4.min.js"   integrity="sha256-ZosEbRLbNQzLpnKIkEdrPv7lOy9C27hHQ+Xp8a4MxAQ="   crossorigin="anonymous"></script>
+    <link rel="stylesheet" href=" https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.7.1/css/bootstrap-datepicker.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.7.1/locales/bootstrap-datepicker.ar.min.js"></script>
+
+
+</head>
+
+<body>
+
+<nav class="navbar navbar-default">
+    <div class="container-fluid">
+        <div class="navbar-header">
+            <ul class="nav navbar-nav">
+                <li><img alt="Brand" href="http://www.servicio.io" src="http://servicio.io/wp-content/uploads/2016/05/servicio-logo-hellblau-auto-ohne-hintergrund-1.png" style="height: 45px; width: auto; margin-top:15px; margin-right: 50px; text-align: left; display:table-cell; vertical-align:middle;"></li>
+                <li style="text-align: left; display:table-cell; vertical-align:middle; margin-bottom: 5px"><a href="http://www.krallerhof.servicio.io/wlanlandingpage">LANDINGPAGE</a></li>
+                <li style="text-align: left; display:table-cell; vertical-align:middle; margin-bottom: 5px"><a href="http://servicio.io/tester-info-3">INFO</a></li>
+            </ul>
+        </div>
+        <ul class="nav navbar-nav navbar-right">
+            <li><img alt="Partner" href="http://www.krallerhof.servicio.io/wlanlandingpage" src="http://servicio.io/wp-content/uploads/2017/08/Krallerhof_DsSdL_4c.jpg" style="height: 45px; width: auto; margin-top: 10px; margin-bottom: 5px; margin-right: 5px;float: right; text-align: right; display:table-cell; vertical-align:middle;"></li>
+        </ul>
+    </div>
+</nav>
+
+<div id="charge-error" class="alert alert-danger <% if ( !errMsg ) { %> hidden <% } %>">
+    <%= errMsg  %>
+</div>
+
+<div class="row">
+    <div class="container-fluid">
+        <div class="col-md-4"><h3>Angemeldete Gäste</h3>
+            <div class="row1">
+                <div *ngFor="let guest of guests">
+                    <div class="card" *ngIf="guest.signed_up">
+                        <img src="{{guest.profile_pic}}" style="width: 60px;height: 60px;position: relative;border-radius: 50%;margin: 5px; margin-left: 60%;">
+                        <p><b>Name:</b> {{guest.first_name + " "}}{{guest.last_name}}<br>
+                            <b>Geschlecht:</b> {{guest.gender}}<br>
+                            <b>Heimat:</b> {{guest.locale}}<br>
+                            <b>FacebookID:</b> {{guest.senderId}}<br>
+                            <b>Angemeldet am:</b> {{guest.signed_up_at}}<br>
+                        </p>
+                    </div>
+                </div>
+            </div><h3>Abgemeldete Gäste</h3>
+            <div class="row1">
+                <div *ngFor="let guest of guests">
+                    <div class="card" *ngIf="!guest.signed_up">
+                        <img src="{{guest.profile_pic}}" style="width: 60px;height: 60px;position: relative;border-radius: 50%;margin: 5px; margin-left: 60%;">
+                        <p><b>Name:</b> {{guest.first_name + " "}}{{guest.last_name}}<br>
+                            <b>Geschlecht:</b> {{guest.gender}}<br>
+                            <b>Heimat:</b> {{guest.locale}}<br>
+                            <b>FacebookID:</b> {{guest.senderId}}<br>
+                            <b>Angemeldet am:</b> {{guest.signed_up_at}}<br>
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-4"><h3>Nachricht senden</h3>
+            <div class="row3">
+                <form class="SendMessage" (submit)="sendMessage($event)">
+                    <div class="col-xs-12" style="padding: 0px 10px 10px 10px">
+                        <div class="form-group2">
+                            ​<textarea id="nachrichtSenden" rows="5" type="text" style="margin-bottom: 10px" [(ngModel)]="title" name="title" class="form-control" required>
+                            </textarea>
+                            <input type="file" style="float: left; margin-top: 10px; color: #0a7a74" (change)="fileChangeEvent($event)" placeholder="Upload file..." />
+                            <button style=" background-color: #0a7a74; float: right; color:  white" type="button" class="btn btn-send" (click)="upload()">DATEI ANHÄNGEN</button>
+                        </div>
+                    </div>
+                    <div class="col-xs-12" style="padding: 0px 0px 0px 0px; right: 2.5%">
+                        <div class="form-group">
+                            <h6>Nachricht jetzt versenden</h6>
+                            <button style=" background-color: #0a7a74; color: white " type="submit" class="btn btn-send">JETZT SENDEN</button> <!--Title for button is same as that of the page-->
+                        </div>
+                    </div>
+                </form>
+                <div class="col-xs-12" style="padding: 0px 0px 0px 0px; right: 2.5%">
+                    <div class="group">
+                        <h6>Nachricht für später planen</h6>
+                        <datetime [timepicker]="{ showMeridian: false, minuteStep: 1 }" [datepicker]="datepickerOpts" [(ngModel)]="scheduledDate" [hasClearButton]="true"></datetime>
+                        <button style=" background-color: #0a7a74; margin-top: 20px; color: white" type="submit" class="btn btn-send" (click)="clicked()">SPÄTER SENDEN</button> <!--Title for button is same as that of the page-->
+                    </div>
+                </div>
+                <h3>Gesendete Nachrichten</h3>
+                <div class="row1">
+                    <div *ngFor="let Messages of sentMessages">
+                        <p><b>Nachricht gesendet am: </b>{{Messages.date | amLocale:'de' | amDateFormat:'MMMM Do YYYY, h:mm:ss a'}}<br><b>Nachricht: </b>{{Messages.text}}<br><b>Datei im Anhang: </b>{{Messages.uploaded_file}}</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-4"><h3>Geplante Nachrichten</h3>
+            <div class="col-xs-12" style="padding: 0px 0px 0px 0px;">
+                <div class="row1">
+                    <div class="card" style="margin-top: 10px" *ngFor="let Messages of scheduledMessages">
+                        <div [ngStyle]="{'background-color': Messages.isInThePast ? 'white' : '#0a7a74'}">
+                            <div [ngStyle]="{'color': Messages.isInThePast ? 'black' : 'white'}">
+                                <p><b>Nachricht wird gesendet am: </b>{{Messages.date | amLocale:'de' | amDateFormat:'MMMM Do YYYY, h:mm:ss a'}}<br><br><b>Nachricht: </b>{{Messages.text}}<br><b>Datei im Anhang: </b>{{Messages.uploaded_file}}</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+</body>
+</html>

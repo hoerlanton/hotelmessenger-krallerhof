@@ -1,0 +1,8 @@
+{
+    "appSecret": "d3a4fc9491c5db018e8835805165018c",
+    "pageAccessToken": "EAAa1MEXT4gYBAJ0MEkOLLFQffjQWjCgQNDi2IcZAYSL9iVFWkK7LauL5ijID2xJ5r6iGfEQZB8b4V0VSBLsCYDrxgiUTbL5E84z84mZBF84MTbZCKk5JnTW1h3xAauI88vLqF0QDT6ICKj9a2rkCxLaFVDHS6Nj9M0kCKptw0wZDZD",
+    "validationToken": "anton1234",
+    "serverURL": "https://www.krallerhof.servicio.io/webhook",
+    "hostURL": "www.krallerhof.servicio.io",
+    "hotelName": "Hotel Krallerhof"
+}
