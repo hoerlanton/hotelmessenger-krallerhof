@@ -942,6 +942,14 @@ function toComment(sourceMap) {
 
 /***/ }),
 
+/***/ "../../../../mdn-polyfills/Object.assign.js":
+/***/ (function(module, exports) {
+
+!function(){"use strict";function n(n){if(void 0===n||null===n)throw new TypeError("Cannot convert undefined or null to object");for(var t=Object(n),o=1;o<arguments.length;o++){var r=arguments[o];if(void 0!==r&&null!==r)for(var e in r)r.hasOwnProperty(e)&&(t[e]=r[e])}return t}"function"!=typeof Object.assign&&(Object.assign=n)}();
+
+
+/***/ }),
+
 /***/ "../../../../moment/locale/af.js":
 /***/ (function(module, exports, __webpack_require__) {
 
