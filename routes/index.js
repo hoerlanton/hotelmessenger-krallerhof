@@ -1,9 +1,10 @@
+'use strict';
+
 var express = require('express');
 var router = express.Router();
 var https = require('https');
 var request = require('request');
 var http = require('http');
-var parseString = require('xml2js').parseString;
 var sourceFile = require('../app');
 var cors = require('cors');
 var bodyParser = require('body-parser');
@@ -13,13 +14,12 @@ var config = require('config');
 var cron = require('node-cron');
 var CronJob = require('cron').CronJob;
 
+
 // HOST_URL used for DB calls - SERVER_URL without https or https://
 const HOST_URL = config.get('hostURL');
 // URL where the app is running (include protocol). Used to point to scripts and
 // assets located at this address.
-const SERVER_URL = (process.env.SERVER_URL) ?
-    (process.env.SERVER_URL) :
-    config.get('serverURL');
+const SERVER_URL = config.get('serverURL');
 
 //Bodyparser middleware
 router.use(bodyParser.urlencoded({ extended: false}));
@@ -29,9 +29,6 @@ router.use(cors());
 
 //Global variables
 var errMsg = "";
-var successMsg = "";
-
-//Data recieved from the HotelResRQ request to Channelmanager
 var newFileUploaded = false;
 var gaesteGlobalSenderID =[];
 var broadcast = "";
@@ -48,13 +45,14 @@ var dateMinute = "";
 router.get('/guestsMessages', function(req, res, next) {
     console.log("guestsMessages get called");
     //Get guests from Mongo DB
-    db.krallerhofMessages.find(function(err, message){
+    db.krallerhofMessages.find(function(err, krallerhofMessages){
         if (err){
             res.send(err);
         }
-        res.json(message);
+        res.json(krallerhofMessages);
     });
 });
+
 
 //Get all ScheduldedMessages
 router.get('/guestsScheduledMessages', function(req, res, next) {
@@ -72,18 +70,19 @@ router.get('/guestsScheduledMessages', function(req, res, next) {
 router.get('/guests', function(req, res, next) {
     console.log("guests get called");
     //Get guests from Mongo DB
-    db.krallerhofGaeste.find(function(err, gaeste){
+    db.krallerhofGaeste.find(function(err, krallerhofGaeste){
         if (err){
             res.send(err);
         }
-        res.json(gaeste);
+        res.json(krallerhofGaeste);
     });
 });
 
 //Save new guests
 router.post('/guests', function(req, res, next) {
     //JSON string is parsed to a JSON object
-    console.log("Post request made to /guests");
+    console.log("Post request made to ****Guest*****");
+    console.dir(req.body);
     var guest = req.body;
     console.dir(guest);
     if(!guest.first_name || !guest.last_name){
@@ -103,20 +102,21 @@ router.post('/guests', function(req, res, next) {
 
 //Update guest
 router.put('/guests', function(req, res, next) {
-    console.log("Put request made to /guest");
+    console.log("Put request made to ****Guest*****");
+    console.log(req.body);
     var guestUpdate = req.body;
     var guestUpdateString = JSON.stringify(guestUpdate);
     var guestUpdateHoi = guestUpdateString.slice(2, -5);
-    console.log("SenderId:" + guestUpdateHoi);
+    console.log(guestUpdateHoi);
     db.krallerhofGaeste.update({
             senderId:  guestUpdateHoi  },
         {
             $set: { signed_up: false }
-        }, { multi: true }, function (err, gaeste){
+        }, { multi: true }, function (err, krallerhofGaeste){
             if(err) {
                 console.log("error: " + err);
             } else {
-                console.log("Updated successfully, gaeste var (deleted) - put request signed_up: false successful. //index.js 128");
+                console.log("Updated successfully, gaeste var (deleted) - put request signed_up: false successful - //index.js line 121");
             }});
 });
 
@@ -137,7 +137,10 @@ router.post('/guestsMessage', function(req, res, next) {
     var uploadedFileName = sourceFile.uploadedFileName;
     //Destination URL for uploaded files
     var URLUploadedFile = String(config.get('serverURL') + "/uploads/" + uploadedFileName);
+    console.log("NEWFILEUPLOAD ======= >>>> 1" +  newFileUploaded);
+
     newFileUploaded = sourceFile.newFileUploaded;
+    console.log("NEWFILEUPLOAD ======= >>>> 2" +  newFileUploaded);
 
     db.krallerhofGaeste.find(function (err, gaeste) {
         if (err) {
@@ -154,6 +157,7 @@ router.post('/guestsMessage', function(req, res, next) {
     });
 
     function broadcastMessages() {
+
         console.log(dateReqFormatted + "=" + dateNowFormatted);
         //If message is not send at least 1 min later than now, schedule event is not fired
         if (dateReqFormatted !== dateNowFormatted) {
@@ -167,8 +171,8 @@ router.post('/guestsMessage', function(req, res, next) {
                 res.json(message);
             });
 
+            console.log("NEWFILEUPLOAD ======= >>>> 3" +  newFileUploaded);
             if (uploadedFileName !== undefined && newFileUploaded === true) {
-
                 db.krallerhofScheduledMessages.update({
                         text: message.text
                     },
@@ -222,15 +226,15 @@ router.post('/guestsMessage', function(req, res, next) {
 
                             var minutes = job.cronTime.toString().slice(2, 4);
                             if (minutes.length === 1) {
-                                minutes = "0" + minutes
+                                minutes = "0" + minutes;
                             }
                             var hour = job.cronTime.toString().slice(5, 7);
                             if (hour.length === 1) {
-                                hour = "0" + hour
+                                hour = "0" + hour;
                             }
                             var day = job.cronTime.toString().slice(8, 10);
                             if (day.length === 1) {
-                                day = "0" + day
+                                day = "0" + day;
                             }
                             var monthNumber = job.cronTime.toString().slice(11, 12);
 
@@ -250,16 +254,15 @@ router.post('/guestsMessage', function(req, res, next) {
                                 if (rightMessage.date.indexOf(regex) !== -1) {
                                     console.log("HHHH:" + rightMessage.date + rightMessage.text);
                                     for (var l = 0; l < gaesteGlobalSenderID.length; l++) {
-                                        sendBroadcast(gaesteGlobalSenderID[l], rightMessage.text);
+                                        sourceFile.sendBroadcast(gaesteGlobalSenderID[l], rightMessage.text);
                                         if (rightMessage.uploaded_file) {
                                             console.log("URLUploadedFile:" + URLUploadedFile);
                                             console.log("rightMessage.uploadedfile: " + rightMessage.uploaded_file);
-                                            sendBroadcastFile(gaesteGlobalSenderID[l], SERVER_URL + "/uploads/" + rightMessage.uploaded_file);
+                                            sourceFile.sendBroadcastFile(gaesteGlobalSenderID[l],  String(config.get('serverURL') + "/uploads/" + rightMessage.uploaded_file));
                                         }
                                     }
                                     db.krallerhofScheduledMessages.update({
-                                            text: rightMessage.text
-                                        },
+                                            text: rightMessage.text },
                                         {
                                             $set: {isInThePast: true}
                                         }, {multi: true}, function (err, message) {
@@ -284,6 +287,10 @@ router.post('/guestsMessage', function(req, res, next) {
             });
             job.start(); // job 1 started
         } else {
+            for (var j = 0; j < gaesteGlobalSenderID.length; j++) {
+                console.log("gaesteGlobalSenderID: line 166 - " + gaesteGlobalSenderID[j]);
+                sourceFile.sendBroadcast(gaesteGlobalSenderID[j], broadcast);
+            }
             //Save Message to DB
             db.krallerhofMessages.save(message, function (err, message) {
                 console.log("Message saved: " + message.text + " " + message.date);
@@ -293,8 +300,8 @@ router.post('/guestsMessage', function(req, res, next) {
                 res.json(message);
             });
 
+            console.log("NEWFILEUPLOAD ======= >>>> 4" +  newFileUploaded);
             if (uploadedFileName !== undefined && newFileUploaded === true) {
-
                 db.krallerhofMessages.update({
                         text: message.text
                     },
@@ -304,20 +311,15 @@ router.post('/guestsMessage', function(req, res, next) {
                         if (err) {
                             console.log("error: " + err);
                         } else {
-                            console.log("Updated successfully uploaded_file element with " + uploadedFileName + ", messages var (deleted)");
+                            console.log("Updated successfully, messages var (deleted)");
                         }
                     });
 
                 console.log("sendbroadcastfile runned");
                 for (var k = 0; k < gaesteGlobalSenderID.length; k++) {
                     console.log("gaesteGlobalSenderID: line 166 - " + gaesteGlobalSenderID[k]);
-                    console.log("------->>>>>: " + URLUploadedFile);
-                    sendBroadcastFile(gaesteGlobalSenderID[k], URLUploadedFile);
+                    sourceFile.sendBroadcastFile(gaesteGlobalSenderID[k], URLUploadedFile);
                 }
-            }
-            for (var j = 0; j < gaesteGlobalSenderID.length; j++) {
-                console.log("gaesteGlobalSenderID: line 166 - " + gaesteGlobalSenderID[j]);
-                sendBroadcast(gaesteGlobalSenderID[j], broadcast);
             }
         }
         errMsg = "";
@@ -331,201 +333,6 @@ router.post('/guestsMessage', function(req, res, next) {
 router.get('/wlanlandingpage', function(req, res, next) {
     res.render('wlanlandingpage', { title: 'Jetzt buchen', errMsg: errMsg, noError: !errMsg});
     console.log("wlanlandingpage ejs rendered");
-
 });
-
-//Get Google Analytics
-router.get('/googleanalytics', function(req, res, next) {
-    res.render('googleAnalytics');
-    console.log("googleAnalytics ejs rendered");
-});
-
-
-
-//Get checkout form page
-router.get('/checkout', function(req, res, next) {
-    res.render('form', { title: 'Jetzt buchen', errMsg: errMsg, noError: !errMsg});
-});
-
-//Get checkout form page for room type Doppelzimmer Deluxe Holzleo
-router.get('/DoppelzimmerDeluxeHolzleo', function(req, res, next) {
-    res.render('form', { title: 'Jetzt buchen', errMsg: errMsg, noError: !errMsg});
-    if (req.route.path === "/DoppelzimmerDeluxeHolzleo") {
-        sourceFile.ratePlanID = '<RoomRate NumberOfUnits=\"' + sourceFile.numberOfRooms + '\" RatePlanID=\"420590\" RatePlanType=\"11\" />';
-        console.log("Works" + req.route.path);
-    }
-});
-
-//Get checkout form page for room type Doppelzimmer Superior Steinleo
-router.get('/DoppelzimmerSuperiorSteinleo', function(req, res, next) {
-    res.render('formDoppelzimmerSuperiorSteinleo', { title: 'Jetzt buchen', errMsg: errMsg, noError: !errMsg});
-    if (req.route.path === "/DoppelzimmerSuperiorSteinleo") {
-        sourceFile.ratePlanID = '<RoomRate NumberOfUnits=\"' + sourceFile.numberOfRooms + '\" RatePlanID=\"420592\" RatePlanType=\"11\" />';
-        console.log("Works" + req.route.path);
-    }
-});
-
-//Get checkout form page for room type Doppelzimmer Classic Steinleo
-router.get('/DoppelzimmerClassicSteinleo', function(req, res, next) {
-    res.render('formDoppelzimmerClassicSteinleo', { title: 'Jetzt buchen', errMsg: errMsg, noError: !errMsg});
-    if (req.route.path === "/DoppelzimmerClassicSteinleo") {
-        sourceFile.ratePlanID = '<RoomRate NumberOfUnits=\"' + sourceFile.numberOfRooms + '\" RatePlanID=\"420594\" RatePlanType=\"11\" />';
-        console.log("Works" + req.route.path);
-    }
-});
-
-//Buchungsserfolg page
-router.get('/bookingsuccess', function(req, res, next) {
-    res.render('success', { title: 'Jetzt buchen', successMsg: successMsg, noMessage: !successMsg });
-});
-
-//Buchungsfehlschlag page
-router.get('/bookingfailure', function(req, res, next) {
-    res.render('error', { title: 'Jetzt buchen', errMsg: errMsg, noError: !errMsg});
-});
-
-//Facebook Login Test page
-router.get('/facebookLogin', function(req, res, next) {
-    res.render('facebookLogin', { title: 'Jetzt buchen', errMsg: errMsg, noError: !errMsg});
-    console.log("facebookLogin ejs rendered");
-});
-
-//Recieve Checkout Form data, Make Reservation request and charge the Credit card via Stripe
-router.post('/checkout', function(req, res, next){
-    console.log("Checkout called <<<<------");
-
-    //Setting up variables - aggregating data from the checkout form
-    var checkoutData = JSON.stringify(req.body);
-    var checkoutDataSplitted = checkoutData.split(",");
-    var checkoutDataSplittedTwiceName = checkoutDataSplitted[0].split(":");
-    var checkoutDataName = checkoutDataSplittedTwiceName[1].slice(1, -1);
-    var checkoutDataSplittedTwiceAddress = checkoutDataSplitted[1].split(":");
-    var checkoutDataAddress = checkoutDataSplittedTwiceAddress[1].slice(1, -1)
-    var checkoutDataSplittedTwiceCardName = checkoutDataSplitted[2].split(":");
-    var checkoutDataCardName = checkoutDataSplittedTwiceCardName[1].slice(1, -1);
-    var checkoutDataSplittedTwiceCardNumber = checkoutDataSplitted[3].split(":");
-    var checkoutDataCardNumber = checkoutDataSplittedTwiceCardNumber[1].slice(1, -1);
-    var checkoutDataSplittedTwiceCardExpiryYear = checkoutDataSplitted[5].split(":");
-    var checkoutDataCardExpiryYear = checkoutDataSplittedTwiceCardExpiryYear[1].slice(1, -1);
-    var checkoutDataSplittedTwiceCardCvc = checkoutDataSplitted[6].split(":");
-    var checkoutDataCardCvc = checkoutDataSplittedTwiceCardCvc[1].slice(1, -1);
-    //var checkoutDataSplittedTwiceCardExpiryMonth = checkoutDataSplitted[4].split(":");
-    //var checkoutDataCardExpiryMonth = checkoutDataSplittedTwiceCardExpiryMonth[1].slice(1, -1);
-
-    //Exported on line 576
-    var numberOfPersonsReservation = sourceFile.numberOfPersons - 1;
-
-    if (numberOfPersonsReservation < 1) {
-        numberOfPersonsReservation = 1
-    }
-    else if (numberOfPersonsReservation > 2) {
-        numberOfPersonsReservation = 2
-    }
-
-    /*
-     * Adding data from the app.js - exporting by exports.
-     * Exported on line 584
-     */
-    var numberOfRoomsReservation = sourceFile.numberOfRooms;
-    //Exported on line 597
-    var arrivalDateReservation = sourceFile.arrivalDate;
-    //Exported on line 670
-    var departureDateReservation = sourceFile.departureDate;
-    //Exported in function sendGenericMessageOfferX
-    var ratePlanIDReservation = sourceFile.ratePlanID;
-
-    //var senderID = sourceFile.senderID;
-    //console.log("1:" + checkoutDataName + "2:" + checkoutDataAddress + "3:" + checkoutDataCardName + "4:" + checkoutDataCardNumber +"5:" + checkoutDataCardExpiryYear + "6:" + checkoutDataCardCvc + "7:" + numberOfPersonsReservation + "8:" + numberOfRoomsReservation + "9:" + arrivalDateReservation + "10:" + departureDateReservation + "11:" + ratePlanIDReservation);
-
-    resetData();
-    sendHotelResRQ(checkoutDataName, checkoutDataAddress, checkoutDataCardName, checkoutDataCardNumber, checkoutDataCardExpiryYear, checkoutDataCardCvc, numberOfPersonsReservation, numberOfRoomsReservation, arrivalDateReservation, departureDateReservation, ratePlanIDReservation);
-    setTimeout(function () {
-        if (redirect) {
-            console.log("bookingfailure");
-            return res.redirect('/bookingfailure');
-        } else {
-            assignTotalPriceReservation();
-            var stripe = require("stripe")(
-                "sk_test_lt0sXEAzs52AA4Nh3PBc3fec"
-            );
-            stripe.charges.create({
-                amount: totalPriceChargeReservationInt * 100,
-                currency: "eur",
-                source: req.body.stripeToken, // obtained with Stripe.js
-                description: "Test charge"
-            }, function (err, charge) {
-                if (err) {
-                    errMsg = "Error";
-                    console.log("Charge failed!");
-                    return res.redirect('/checkout');
-                }
-                if (charge) {
-                    successMsg = 'Sie haben die Buchung erfolgreich abgeschlossen';
-                    res.redirect('/bookingsuccess');
-                    console.log(sourceFile.senderID);
-                    sendBookingConfirmation(sourceFile.senderID, checkoutDataName, checkoutDataAddress, numberOfPersonsReservation, numberOfRoomsReservation, arrivalDateReservation, departureDateReservation, totalPriceChargeReservationInt);
-                    sendPDF(sourceFile.senderID);
-                }
-            });
-        }
-    }, 20000);
-});
-
-//Broadcast gesendet von Dashboard to all angemeldete Gäste
-function sendBroadcast(recipientId, broadcastText) {
-    console.log("---->>>>>recipientId: in send broadcast function: "  + recipientId);
-    var messageData = {
-        recipient: {
-            id: recipientId
-        },
-        message: {
-            text: broadcastText,
-            metadata: "DEVELOPER_DEFINED_METADATA"
-        }
-    };
-    sourceFile.callSendAPI(messageData);
-}
-
-//Broadcast gesendet von Dashboard to all angemeldete Gäste - Wenn Anhang hochgeladen, diese function wird gecalled
-function sendBroadcastFile(recipientId, URLUploadedFile) {
-    var messageData;
-    var imageEnding = "jpg";
-    var imageEnding2 = "png";
-    console.log("------->>>>>: " + URLUploadedFile);
-    if (URLUploadedFile.indexOf(imageEnding) !== -1 || URLUploadedFile.indexOf(imageEnding2) !== -1 ) {
-        messageData = {
-            recipient: {
-                id: recipientId
-            },
-            message: {
-                attachment: {
-                    type: "image",
-                    payload: {
-                        url: URLUploadedFile
-                    }
-                }
-            }
-        };
-        console.log("------->>>>>URL message attachet " + messageData.message.attachment.payload.url);
-        sourceFile.callSendAPI(messageData);
-    } else {
-        messageData = {
-            recipient: {
-                id: recipientId
-            },
-            message: {
-                attachment: {
-                    type: "file",
-                    payload: {
-                        url: URLUploadedFile
-                    }
-                }
-            }
-        };
-        sourceFile.callSendAPI(messageData);
-        console.log("------->>>>>URL message attachet " + messageData.message.attachment.payload.url);
-    }
-
-}
 
 module.exports = router;
