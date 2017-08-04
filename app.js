@@ -768,6 +768,7 @@ function sendAccountLinking(recipientId) {
 function callSendAPI(messageData) {
     console.log("SEND API CALLLED <------------");
     console.log("Recipient ID: top " + messageData.recipient.id);
+
   request({
     uri: 'https://graph.facebook.com/v2.6/me/messages',
     qs: { access_token: PAGE_ACCESS_TOKEN },
@@ -775,7 +776,7 @@ function callSendAPI(messageData) {
     json: messageData
 
   }, function (error, response, body) {
-        if (!error && response.statusCode == 200) {
+        if (!error && response.statusCode === 200) {
             var recipientId = body.recipient_id;
             console.log("Recipient ID:" + recipientId);
       var messageId = body.message_id;

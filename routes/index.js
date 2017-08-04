@@ -313,13 +313,14 @@ router.post('/guestsMessage', function(req, res, next) {
                         if (err) {
                             console.log("error: " + err);
                         } else {
-                            console.log("Updated successfully uploaded_file element with " + uploadedFileName + "value, messages var (deleted)");
+                            console.log("Updated successfully uploaded_file element with " + uploadedFileName + ", messages var (deleted)");
                         }
                     });
 
                 console.log("sendbroadcastfile runned");
                 for (var k = 0; k < gaesteGlobalSenderID.length; k++) {
                     console.log("gaesteGlobalSenderID: line 166 - " + gaesteGlobalSenderID[k]);
+                    console.log("------->>>>>: " + URLUploadedFile);
                     sendBroadcastFile(gaesteGlobalSenderID[k], URLUploadedFile);
                 }
             }
@@ -681,6 +682,7 @@ function sendBroadcastFile(recipientId, URLUploadedFile) {
     var messageData;
     var imageEnding = "jpg";
     var imageEnding2 = "png";
+    console.log("------->>>>>: " + URLUploadedFile);
     if (URLUploadedFile.indexOf(imageEnding) !== -1 || URLUploadedFile.indexOf(imageEnding2) !== -1 ) {
         messageData = {
             recipient: {
@@ -695,6 +697,7 @@ function sendBroadcastFile(recipientId, URLUploadedFile) {
                 }
             }
         };
+        console.log("------->>>>>URL message attachet " + messageData.message.attachment.payload.url);
         sourceFile.callSendAPI(messageData);
     } else {
         messageData = {
@@ -711,6 +714,7 @@ function sendBroadcastFile(recipientId, URLUploadedFile) {
             }
         };
         sourceFile.callSendAPI(messageData);
+        console.log("------->>>>>URL message attachet " + messageData.message.attachment.payload.url);
     }
 
 }
