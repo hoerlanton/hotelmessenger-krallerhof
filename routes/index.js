@@ -221,7 +221,8 @@ router.post('/guestsMessage', function(req, res, next) {
                             var bufferObject = JSON.parse(buffer);
 
                             //console.log(bufferObject);
-                            var cronTimeSplitted = job.cronTime.split(" ");
+                            var crontTimeString = job.cronTime.toString();
+                            var cronTimeSplitted = crontTimeString(" ");
 
                             console.log("jobcrontime splitted: " + cronTimeSplitted);
 
