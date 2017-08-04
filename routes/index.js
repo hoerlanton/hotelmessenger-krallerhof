@@ -226,19 +226,19 @@ router.post('/guestsMessage', function(req, res, next) {
 
                             console.log("jobcrontime splitted: " + cronTimeSplitted);
 
-                            var minutes = cronTimeSplitted[0];
+                            var minutes = cronTimeSplitted[1];
                             if (minutes.length === 1) {
                                 minutes = "0" + minutes;
                             }
-                            var hour = cronTimeSplitted[1];
+                            var hour = cronTimeSplitted[2];
                             if (hour.length === 1) {
                                 hour = "0" + hour;
                             }
-                            var day = cronTimeSplitted[2];
+                            var day = cronTimeSplitted[3];
                             if (day.length === 1) {
                                 day = "0" + day;
                             }
-                            var monthNumber = cronTimeSplitted[3];
+                            var monthNumber = cronTimeSplitted[4];
 
                             console.log("---->>>monthnumber" + monthNumber);
 
