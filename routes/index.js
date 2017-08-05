@@ -307,24 +307,24 @@ router.post('/guestsMessage', function(req, res, next) {
 
             console.log("NEWFILEUPLOAD ======= >>>> 4" +  newFileUploaded);
             if (uploadedFileName !== undefined && newFileUploaded === true) {
-                db.krallerhofMessages.update({
-                        text: message.text
-                    },
-                    {
-                        $set: {uploaded_file: uploadedFileName}
-                    }, {multi: true}, function (err, message) {
-                        if (err) {
-                            console.log("error: " + err);
-                        } else {
-                            console.log("Updated successfully, messages var (deleted)");
-                        }
-                    });
-
                 console.log("sendbroadcastfile runned");
                 for (var k = 0; k < gaesteGlobalSenderID.length; k++) {
                     console.log("gaesteGlobalSenderID: line 166 - " + gaesteGlobalSenderID[k]);
                     sourceFile.sendBroadcastFile(gaesteGlobalSenderID[k], URLUploadedFile);
-                }
+
+                    db.krallerhofMessages.update({
+                            text: message.text
+                        },
+                        {
+                            $set: {uploaded_file: uploadedFileName}
+                        }, {multi: true}, function (err, message) {
+                            if (err) {
+                                console.log("error: " + err);
+                            } else {
+                                console.log("Updated successfully, messages var (deleted)");
+                            }
+                        });
+                    }
             }
         }
         errMsg = "";
