@@ -305,27 +305,65 @@ router.post('/guestsMessage', function(req, res, next) {
                 res.json(message);
             });
 
-            console.log("NEWFILEUPLOAD ======= >>>> 4" +  newFileUploaded);
+            console.log("NEWFILEUPLOAD ======= >>>> 4" + newFileUploaded);
             if (uploadedFileName !== undefined && newFileUploaded === true) {
-                console.log("sendbroadcastfile runned");
-                for (var k = 0; k < gaesteGlobalSenderID.length; k++) {
-                    console.log("gaesteGlobalSenderID: line 166 - " + gaesteGlobalSenderID[k]);
-                    sourceFile.sendBroadcastFile(gaesteGlobalSenderID[k], URLUploadedFile);
-                }
-                    db.krallerhofMessages.update({
-                            text: message.text,
-                            date: message.date
-                        },
-                        {
-                            $set: {uploaded_file: uploadedFileName}
-                        }, {multi: true}, function (err, message) {
-                            if (err) {
-                                console.log("error: " + err);
-                            } else {
-                                console.log("Updated successfully, messages var (deleted)");
-                            }
-                        });
 
+                db.krallerhofMessages.update({
+                        text: message.text,
+                        date: message.date
+                    },
+                    {
+                        $set: {uploaded_file: uploadedFileName}
+                    }, {multi: true}, function (err, message) {
+                        if (err) {
+                            console.log("error: " + err);
+                        } else {
+                            console.log("Updated successfully, messages var (deleted)");
+                        }
+                    });
+
+                var bufferMessages = "";
+                var optionsget = {
+                    host: HOST_URL,
+                    path: '/guestsMessages',
+                    method: 'GET'
+                };
+
+                console.info('Options prepared:');
+                console.info(optionsget);
+                console.info('Do the GET call');
+
+                // do the GET request to retrieve data from the user's graph API
+                var reqGet = https.request(optionsget, function (res) {
+                    console.log("statusCode: ", res.statusCode);
+                    // uncomment it for header details
+                    // console.log("headers: ", res.headers);
+
+                    res.on('data', function (d) {
+                        console.info('GET result:\n');
+                        //process.stdout.write(d);
+                        bufferMessages += d;
+                        //for (var q = 0; q < bufferMessages.length; q++) {
+                        var objectMessages = JSON.parse(bufferMessages);
+                        var lastMessage = objectMessages.length - 1;
+                        console.log("1:" + lastMessage);
+                        console.log("2:" + objectMessages[lastMessage].text);
+                        console.log("3:" + objectMessages[lastMessage].uploaded_file);
+                        if (objectMessages[lastMessage].uploaded_file) {
+                            console.log("4:" + objectMessages[lastMessage].uploaded_file);
+                            for (var k = 0; k < gaesteGlobalSenderID.length; k++) {
+                                console.log(config.get('serverURL') + "/uploads/" + objectMessages[lastMessage].uploaded_file);
+                                sourceFile.sendBroadcastFile(gaesteGlobalSenderID[k], String(config.get('serverURL') + "/uploads/" + objectMessages[lastMessage].uploaded_file));
+                            }
+                        }
+                        //}
+                    });
+                });
+                // Build the post string from an object
+                reqGet.end();
+                reqGet.on('error', function (e) {
+                    console.error("Error line 450:" + e);
+                });
             }
         }
         errMsg = "";

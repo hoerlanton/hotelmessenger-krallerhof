@@ -1,0 +1,10 @@
+Ratatouille bot:
+
+Beschreibung:
+
+Dieser Bot erstellt Rezept-Empfehlungen, basierend auf den Eingaben, die der User eingibt. Zu den Eingaben zählen: 1) Küche - z. B.: German, American, Spanish, Southern, Latin America etc. 2) Interolerances - Sesame, peanut, seafood, wheat etc. 3) Type - z. B.: Main course, appetizer, salad, soup, dessert etc. 4) Diets - z.B.: pescetarian, lacto vegetarian, ovo vegetarian, vegan, and vegetarian 5) Natural Language word - z. B.: pork, beef,  burger, Schnitzel etc. Nach der Eingabe des Nutzer wird eine Liste von Rezepten an den User gesendet. Wenn er das genaue Rezept sehen will, kann sie/er das auswählen. Danach werden die Zutaten detailliert aufgelistet und die Schritte zur Zubereitung angegeben.
+
+
+
+
+curl -X POST -H "Content-Type: application/json" -d '{"setting_type" : "domain_whitelisting","whitelisted_domains" : ["https://servicio.io"],"domain_action_type": "add"}' "https://graph.facebook.com/v2.6/me/thread_settings?access_token=EAABmDV3l5aUBADaIbvS6ZCXpqZCVWxZB7miSg2gfZCvzauy6sSL8FIkRv8hq8V8lNY2HjzWEblWHRft8sxCLOK988yuZAYe5wjBeGeP83U6MWkxrHHyr3NSvcb0VKrHDGNvZCnWySkQYbW9ZCeaHqCJH23NMqqdZAQa1qsMCbGI6agZDZD"
