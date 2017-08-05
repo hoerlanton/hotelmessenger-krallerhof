@@ -311,7 +311,7 @@ router.post('/guestsMessage', function(req, res, next) {
                 for (var k = 0; k < gaesteGlobalSenderID.length; k++) {
                     console.log("gaesteGlobalSenderID: line 166 - " + gaesteGlobalSenderID[k]);
                     sourceFile.sendBroadcastFile(gaesteGlobalSenderID[k], URLUploadedFile);
-
+                }
                     db.krallerhofMessages.update({
                             text: message.text
                         },
@@ -324,7 +324,7 @@ router.post('/guestsMessage', function(req, res, next) {
                                 console.log("Updated successfully, messages var (deleted)");
                             }
                         });
-                    }
+
             }
         }
         errMsg = "";
