@@ -313,7 +313,8 @@ router.post('/guestsMessage', function(req, res, next) {
                     sourceFile.sendBroadcastFile(gaesteGlobalSenderID[k], URLUploadedFile);
                 }
                     db.krallerhofMessages.update({
-                            text: message.text
+                            text: message.text,
+                            date: message.date
                         },
                         {
                             $set: {uploaded_file: uploadedFileName}
