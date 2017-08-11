@@ -14,8 +14,6 @@ import { FlashMessagesService } from 'angular2-flash-messages';
     styleUrls: ['dashboard.component.css'],
 })
 
-
-
 export class DashboardComponent implements OnInit {
     guests: Guest[];
     sentMessages: Messages[];

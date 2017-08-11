@@ -9,7 +9,7 @@ var sourceFile = require('../app');
 var cors = require('cors');
 var bodyParser = require('body-parser');
 var mongojs = require('mongojs');
-var db = mongojs('mongodb://anton:b2d4f6h8@ds127132.mlab.com:27132/servicio', ['mama-threslMessages', 'mama-threslGaeste', 'mama-threslScheduledMessages']);
+var db = mongojs('mongodb://anton:b2d4f6h8@ds127132.mlab.com:27132/servicio', ['mamaThreslMessages', 'mamaThreslGaeste', 'mamaThreslScheduledMessages']);
 var config = require('config');
 var cron = require('node-cron');
 var CronJob = require('cron').CronJob;
@@ -45,7 +45,7 @@ var dateMinute = "";
 router.get('/guestsMessages', function(req, res, next) {
     console.log("guestsMessages get called");
     //Get guests from Mongo DB
-    db.mama-threslMessages.find(function(err, message){
+    db.mamaThreslMessages.find(function(err, message){
         if (err){
             res.send(err);
         }
@@ -58,7 +58,7 @@ router.get('/guestsMessages', function(req, res, next) {
 router.get('/guestsScheduledMessages', function(req, res, next) {
     console.log("guestsMessages get called");
     //Get guests from Mongo DB
-    db.mama-threslScheduledMessages.find(function(err, message){
+    db.mamaThreslScheduledMessages.find(function(err, message){
         if (err){
             res.send(err);
         }
@@ -70,7 +70,7 @@ router.get('/guestsScheduledMessages', function(req, res, next) {
 router.get('/guests', function(req, res, next) {
     console.log("guests get called");
     //Get guests from Mongo DB
-    db.mama-threslGaeste.find(function(err, guest){
+    db.mamaThreslGaeste.find(function(err, guest){
         if (err){
             res.send(err);
         }
@@ -91,7 +91,7 @@ router.post('/guests', function(req, res, next) {
             error: "Bad data"
         });
     } else {
-        db.mama-threslGaeste.save(guest, function (err, guest) {
+        db.mamaThreslGaeste.save(guest, function (err, guest) {
             if (err) {
                 res.send(err);
             }
@@ -108,7 +108,7 @@ router.put('/guests', function(req, res, next) {
     var guestUpdateString = JSON.stringify(guestUpdate);
     var guestUpdateHoi = guestUpdateString.slice(2, -5);
     console.log(guestUpdateHoi);
-    db.mama-threslGaeste.update({
+    db.mamaThreslGaeste.update({
             senderId:  guestUpdateHoi  },
         {
             $set: { signed_up: false }
@@ -142,7 +142,7 @@ router.post('/guestsMessage', function(req, res, next) {
     newFileUploaded = sourceFile.newFileUploaded;
     console.log("NEWFILEUPLOAD ======= >>>> 2" +  newFileUploaded);
 
-    db.mama-threslGaeste.find(function (err, gaeste) {
+    db.mamaThreslGaeste.find(function (err, gaeste) {
         if (err) {
             errMsg = "Das senden der Nachricht ist nicht möglich. Es sind keine Gäste angemeldet.";
         } else {
@@ -163,7 +163,7 @@ router.post('/guestsMessage', function(req, res, next) {
         if (dateReqFormatted !== dateNowFormatted) {
             console.log("scheduled event fired!");
             //Save Message to DB
-            db.mama-threslScheduledMessages.save(message, function (err, message) {
+            db.mamaThreslScheduledMessages.save(message, function (err, message) {
                 console.log("scheduleMessage saved: " + message.text + " " + message.date);
                 if (err) {
                     res.send(err);
@@ -173,7 +173,7 @@ router.post('/guestsMessage', function(req, res, next) {
 
             console.log("NEWFILEUPLOAD ======= >>>> 3" +  newFileUploaded);
             if (uploadedFileName !== undefined && newFileUploaded === true) {
-                db.mama-threslScheduledMessages.update({
+                db.mamaThreslScheduledMessages.update({
                         text: message.text
                     },
                     {
@@ -266,7 +266,7 @@ router.post('/guestsMessage', function(req, res, next) {
                                             sourceFile.sendBroadcastFile(gaesteGlobalSenderID[l],  String(config.get('serverURL') + "/uploads/" + rightMessage.uploaded_file));
                                         }
                                     }
-                                    db.mama-threslScheduledMessages.update({
+                                    db.mamaThreslScheduledMessages.update({
                                             text: rightMessage.text },
                                         {
                                             $set: {isInThePast: true}
@@ -297,7 +297,7 @@ router.post('/guestsMessage', function(req, res, next) {
                 sourceFile.sendBroadcast(gaesteGlobalSenderID[j], broadcast);
             }
             //Save Message to DB
-            db.mama-threslMessages.save(message, function (err, message) {
+            db.mamaThreslMessages.save(message, function (err, message) {
                 console.log("Message saved: " + message.text + " " + message.date);
                 if (err) {
                     res.send(err);
@@ -308,7 +308,7 @@ router.post('/guestsMessage', function(req, res, next) {
             console.log("NEWFILEUPLOAD ======= >>>> 4" + newFileUploaded);
             if (uploadedFileName !== undefined && newFileUploaded === true) {
 
-                db.mama-threslMessages.update({
+                db.mamaThreslMessages.update({
                         text: message.text,
                         date: message.date
                     },
