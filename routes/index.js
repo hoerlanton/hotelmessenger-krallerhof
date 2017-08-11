@@ -45,11 +45,11 @@ var dateMinute = "";
 router.get('/guestsMessages', function(req, res, next) {
     console.log("guestsMessages get called");
     //Get guests from Mongo DB
-    db.mama-threslMessages.find(function(err, mama-threslMessages){
+    db.mama-threslMessages.find(function(err, message){
         if (err){
             res.send(err);
         }
-        res.json(mama-threslMessages);
+        res.json(message);
     });
 });
 
