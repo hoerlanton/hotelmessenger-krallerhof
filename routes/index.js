@@ -70,11 +70,11 @@ router.get('/guestsScheduledMessages', function(req, res, next) {
 router.get('/guests', function(req, res, next) {
     console.log("guests get called");
     //Get guests from Mongo DB
-    db.mama-threslGaeste.find(function(err, mama-threslGaeste){
+    db.mama-threslGaeste.find(function(err, guest){
         if (err){
             res.send(err);
         }
-        res.json(mama-threslGaeste);
+        res.json(guest);
     });
 });
 
@@ -112,7 +112,7 @@ router.put('/guests', function(req, res, next) {
             senderId:  guestUpdateHoi  },
         {
             $set: { signed_up: false }
-        }, { multi: true }, function (err, mama-threslGaeste){
+        }, { multi: true }, function (err, gaeste){
             if(err) {
                 console.log("error: " + err);
             } else {
