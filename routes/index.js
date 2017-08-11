@@ -9,7 +9,7 @@ var sourceFile = require('../app');
 var cors = require('cors');
 var bodyParser = require('body-parser');
 var mongojs = require('mongojs');
-var db = mongojs('mongodb://anton:b2d4f6h8@ds127132.mlab.com:27132/servicio', ['krallerhofMessages', 'krallerhofGaeste', 'krallerhofScheduledMessages']);
+var db = mongojs('mongodb://anton:b2d4f6h8@ds127132.mlab.com:27132/servicio', ['mama-threslMessages', 'mama-threslGaeste', 'mama-threslScheduledMessages']);
 var config = require('config');
 var cron = require('node-cron');
 var CronJob = require('cron').CronJob;
@@ -45,11 +45,11 @@ var dateMinute = "";
 router.get('/guestsMessages', function(req, res, next) {
     console.log("guestsMessages get called");
     //Get guests from Mongo DB
-    db.krallerhofMessages.find(function(err, krallerhofMessages){
+    db.mama-threslMessages.find(function(err, mama-threslMessages){
         if (err){
             res.send(err);
         }
-        res.json(krallerhofMessages);
+        res.json(mama-threslMessages);
     });
 });
 
@@ -58,7 +58,7 @@ router.get('/guestsMessages', function(req, res, next) {
 router.get('/guestsScheduledMessages', function(req, res, next) {
     console.log("guestsMessages get called");
     //Get guests from Mongo DB
-    db.krallerhofScheduledMessages.find(function(err, message){
+    db.mama-threslScheduledMessages.find(function(err, message){
         if (err){
             res.send(err);
         }
@@ -70,11 +70,11 @@ router.get('/guestsScheduledMessages', function(req, res, next) {
 router.get('/guests', function(req, res, next) {
     console.log("guests get called");
     //Get guests from Mongo DB
-    db.krallerhofGaeste.find(function(err, krallerhofGaeste){
+    db.mama-threslGaeste.find(function(err, mama-threslGaeste){
         if (err){
             res.send(err);
         }
-        res.json(krallerhofGaeste);
+        res.json(mama-threslGaeste);
     });
 });
 
@@ -91,7 +91,7 @@ router.post('/guests', function(req, res, next) {
             error: "Bad data"
         });
     } else {
-        db.krallerhofGaeste.save(guest, function (err, guest) {
+        db.mama-threslGaeste.save(guest, function (err, guest) {
             if (err) {
                 res.send(err);
             }
@@ -108,11 +108,11 @@ router.put('/guests', function(req, res, next) {
     var guestUpdateString = JSON.stringify(guestUpdate);
     var guestUpdateHoi = guestUpdateString.slice(2, -5);
     console.log(guestUpdateHoi);
-    db.krallerhofGaeste.update({
+    db.mama-threslGaeste.update({
             senderId:  guestUpdateHoi  },
         {
             $set: { signed_up: false }
-        }, { multi: true }, function (err, krallerhofGaeste){
+        }, { multi: true }, function (err, mama-threslGaeste){
             if(err) {
                 console.log("error: " + err);
             } else {
@@ -142,7 +142,7 @@ router.post('/guestsMessage', function(req, res, next) {
     newFileUploaded = sourceFile.newFileUploaded;
     console.log("NEWFILEUPLOAD ======= >>>> 2" +  newFileUploaded);
 
-    db.krallerhofGaeste.find(function (err, gaeste) {
+    db.mama-threslGaeste.find(function (err, gaeste) {
         if (err) {
             errMsg = "Das senden der Nachricht ist nicht möglich. Es sind keine Gäste angemeldet.";
         } else {
@@ -163,7 +163,7 @@ router.post('/guestsMessage', function(req, res, next) {
         if (dateReqFormatted !== dateNowFormatted) {
             console.log("scheduled event fired!");
             //Save Message to DB
-            db.krallerhofScheduledMessages.save(message, function (err, message) {
+            db.mama-threslScheduledMessages.save(message, function (err, message) {
                 console.log("scheduleMessage saved: " + message.text + " " + message.date);
                 if (err) {
                     res.send(err);
@@ -173,7 +173,7 @@ router.post('/guestsMessage', function(req, res, next) {
 
             console.log("NEWFILEUPLOAD ======= >>>> 3" +  newFileUploaded);
             if (uploadedFileName !== undefined && newFileUploaded === true) {
-                db.krallerhofScheduledMessages.update({
+                db.mama-threslScheduledMessages.update({
                         text: message.text
                     },
                     {
@@ -266,7 +266,7 @@ router.post('/guestsMessage', function(req, res, next) {
                                             sourceFile.sendBroadcastFile(gaesteGlobalSenderID[l],  String(config.get('serverURL') + "/uploads/" + rightMessage.uploaded_file));
                                         }
                                     }
-                                    db.krallerhofScheduledMessages.update({
+                                    db.mama-threslScheduledMessages.update({
                                             text: rightMessage.text },
                                         {
                                             $set: {isInThePast: true}
@@ -297,7 +297,7 @@ router.post('/guestsMessage', function(req, res, next) {
                 sourceFile.sendBroadcast(gaesteGlobalSenderID[j], broadcast);
             }
             //Save Message to DB
-            db.krallerhofMessages.save(message, function (err, message) {
+            db.mama-threslMessages.save(message, function (err, message) {
                 console.log("Message saved: " + message.text + " " + message.date);
                 if (err) {
                     res.send(err);
@@ -308,7 +308,7 @@ router.post('/guestsMessage', function(req, res, next) {
             console.log("NEWFILEUPLOAD ======= >>>> 4" + newFileUploaded);
             if (uploadedFileName !== undefined && newFileUploaded === true) {
 
-                db.krallerhofMessages.update({
+                db.mama-threslMessages.update({
                         text: message.text,
                         date: message.date
                     },
