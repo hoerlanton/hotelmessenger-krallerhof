@@ -1,19 +1,17 @@
-'use strict';
-
-var express = require('express');
-var router = express.Router();
-var https = require('https');
-var request = require('request');
-var http = require('http');
-var sourceFile = require('../app');
-var cors = require('cors');
-var bodyParser = require('body-parser');
-var mongojs = require('mongojs');
-var db = mongojs('mongodb://anton:b2d4f6h8@ds127132.mlab.com:27132/servicio', ['mamaThreslMessages', 'mamaThreslGaeste', 'mamaThreslScheduledMessages']);
-var config = require('config');
-var cron = require('node-cron');
-var CronJob = require('cron').CronJob;
-
+const
+    express = require('express'),
+    router = express.Router(),
+    https = require('https'),
+    request = require('request'),
+    http = require('http'),
+    sourceFile = require('../app'),
+    cors = require('cors'),
+    bodyParser = require('body-parser'),
+    mongojs = require('mongojs'),
+    db = mongojs('mongodb://anton:b2d4f6h8@ds127132.mlab.com:27132/servicio', ['mamaThreslMessages', 'mamaThreslGaeste', 'mamaThreslScheduledMessages']),
+    config = require('config'),
+    cron = require('node-cron'),
+    CronJob = require('cron').CronJob;
 
 // HOST_URL used for DB calls - SERVER_URL without https or https://
 const HOST_URL = config.get('hostURL');
@@ -53,7 +51,6 @@ router.get('/guestsMessages', function(req, res, next) {
     });
 });
 
-
 //Get all ScheduldedMessages
 router.get('/guestsScheduledMessages', function(req, res, next) {
     console.log("guestsMessages get called");
@@ -70,19 +67,18 @@ router.get('/guestsScheduledMessages', function(req, res, next) {
 router.get('/guests', function(req, res, next) {
     console.log("guests get called");
     //Get guests from Mongo DB
-    db.mamaThreslGaeste.find(function(err, guest){
+    db.mamaThreslGaeste.find(function(err, gaeste){
         if (err){
             res.send(err);
         }
-        res.json(guest);
+        res.json(gaeste);
     });
 });
 
 //Save new guests
 router.post('/guests', function(req, res, next) {
     //JSON string is parsed to a JSON object
-    console.log("Post request made to ****Guest*****");
-    console.dir(req.body);
+    console.log("Post request made to /guests");
     var guest = req.body;
     console.dir(guest);
     if(!guest.first_name || !guest.last_name){
@@ -102,12 +98,11 @@ router.post('/guests', function(req, res, next) {
 
 //Update guest
 router.put('/guests', function(req, res, next) {
-    console.log("Put request made to ****Guest*****");
-    console.log(req.body);
+    console.log("Put request made to /guest");
     var guestUpdate = req.body;
     var guestUpdateString = JSON.stringify(guestUpdate);
     var guestUpdateHoi = guestUpdateString.slice(2, -5);
-    console.log(guestUpdateHoi);
+    console.log("SenderId:" + guestUpdateHoi);
     db.mamaThreslGaeste.update({
             senderId:  guestUpdateHoi  },
         {
@@ -116,7 +111,7 @@ router.put('/guests', function(req, res, next) {
             if(err) {
                 console.log("error: " + err);
             } else {
-                console.log("Updated successfully, gaeste var (deleted) - put request signed_up: false successful - //index.js line 121");
+                console.log("Updated successfully, gaeste var (deleted) - put request signed_up: false successful. //index.js 128");
             }});
 });
 
@@ -137,10 +132,7 @@ router.post('/guestsMessage', function(req, res, next) {
     var uploadedFileName = sourceFile.uploadedFileName;
     //Destination URL for uploaded files
     var URLUploadedFile = String(config.get('serverURL') + "/uploads/" + uploadedFileName);
-    console.log("NEWFILEUPLOAD ======= >>>> 1" +  newFileUploaded);
-
     newFileUploaded = sourceFile.newFileUploaded;
-    console.log("NEWFILEUPLOAD ======= >>>> 2" +  newFileUploaded);
 
     db.mamaThreslGaeste.find(function (err, gaeste) {
         if (err) {
@@ -155,9 +147,7 @@ router.post('/guestsMessage', function(req, res, next) {
             broadcastMessages();
         }
     });
-
     function broadcastMessages() {
-
         console.log(dateReqFormatted + "=" + dateNowFormatted);
         //If message is not send at least 1 min later than now, schedule event is not fired
         if (dateReqFormatted !== dateNowFormatted) {
@@ -171,8 +161,8 @@ router.post('/guestsMessage', function(req, res, next) {
                 res.json(message);
             });
 
-            console.log("NEWFILEUPLOAD ======= >>>> 3" +  newFileUploaded);
             if (uploadedFileName !== undefined && newFileUploaded === true) {
+
                 db.mamaThreslScheduledMessages.update({
                         text: message.text
                     },
@@ -263,11 +253,12 @@ router.post('/guestsMessage', function(req, res, next) {
                                         if (rightMessage.uploaded_file) {
                                             console.log("URLUploadedFile:" + URLUploadedFile);
                                             console.log("rightMessage.uploadedfile: " + rightMessage.uploaded_file);
-                                            sourceFile.sendBroadcastFile(gaesteGlobalSenderID[l],  String(config.get('serverURL') + "/uploads/" + rightMessage.uploaded_file));
+                                            sourceFile.sendBroadcastFile(gaesteGlobalSenderID[l], SERVER_URL + "/uploads/" + rightMessage.uploaded_file);
                                         }
                                     }
                                     db.mamaThreslScheduledMessages.update({
-                                            text: rightMessage.text },
+                                            text: rightMessage.text
+                                        },
                                         {
                                             $set: {isInThePast: true}
                                         }, {multi: true}, function (err, message) {
@@ -377,6 +368,7 @@ router.post('/guestsMessage', function(req, res, next) {
 router.get('/wlanlandingpage', function(req, res, next) {
     res.render('wlanlandingpage', { title: 'Jetzt buchen', errMsg: errMsg, noError: !errMsg});
     console.log("wlanlandingpage ejs rendered");
+
 });
 
 module.exports = router;
