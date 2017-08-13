@@ -1,19 +1,19 @@
 /* jshint node: true, devel: true */
 'use strict';
- 
+
 const
-  bodyParser = require('body-parser'),
-  config = require('config'),
-  crypto = require('crypto'),
-  express = require('express'),
-  https = require('https'),  
-  request = require('request'),
-  http = require('http'),
-  routes = require('./routes/index'),
-  app = express(),
-  multer = require('multer'),
-  path = require('path'),
-  moment = require('moment-timezone');
+    bodyParser = require('body-parser'),
+    config = require('config'),
+    crypto = require('crypto'),
+    express = require('express'),
+    https = require('https'),
+    request = require('request'),
+    http = require('http'),
+    routes = require('./routes/index'),
+    app = express(),
+    multer = require('multer'),
+    path = require('path'),
+    moment = require('moment-timezone');
 
 
 //Bodyparser middleware
@@ -49,9 +49,6 @@ app.use('/', routes);
 
 //Global variables
 var i = 0;
-var autoAnswerIsOn = true;
-var newFileUploaded = false;
-exports.newFileUploaded = false;
 //data when user clicks send to messenger button -> send to index.js REST-API
 var a = {};
 //object a stringified in order to make post request to REST-API
@@ -62,7 +59,7 @@ var c = "";
 var storage = multer.diskStorage({
     // Destination of upload
     destination: function (req, file, cb) {
-        cb(null, './uploads/')
+        cb(null, './uploads/');
     },
     // Rename of file
     filename: function (req, file, cb) {
@@ -73,32 +70,32 @@ var storage = multer.diskStorage({
 var upload = multer({ storage: storage });
 
 /*
- * Be sure to setup your config values before running this code. You can 
+ * Be sure to setup your config values before running this code. You can
  * set them using environment variables or modifying the config file in /config.
  *
  */
 
 // Data set p in config/default.json file
 // App Secret can be retrieved from the App Dashboard
-const APP_SECRET = (process.env.MESSENGER_APP_SECRET) ? 
-  process.env.MESSENGER_APP_SECRET :
-  config.get('appSecret');
+const APP_SECRET = (process.env.MESSENGER_APP_SECRET) ?
+    process.env.MESSENGER_APP_SECRET :
+    config.get('appSecret');
 
 // Arbitrary value used to validate a webhook
 const VALIDATION_TOKEN = (process.env.MESSENGER_VALIDATION_TOKEN) ?
-  (process.env.MESSENGER_VALIDATION_TOKEN) :
-  config.get('validationToken');
+    (process.env.MESSENGER_VALIDATION_TOKEN) :
+    config.get('validationToken');
 
 // Generate a page access token for your page from the App Dashboard
 const PAGE_ACCESS_TOKEN = (process.env.MESSENGER_PAGE_ACCESS_TOKEN) ?
-  (process.env.MESSENGER_PAGE_ACCESS_TOKEN) :
-  config.get('pageAccessToken');
+    (process.env.MESSENGER_PAGE_ACCESS_TOKEN) :
+    config.get('pageAccessToken');
 
-// URL where the app is running (include protocol). Used to point to scripts and 
-// assets located at this address. 
+// URL where the app is running (include protocol). Used to point to scripts and
+// assets located at this address.
 const SERVER_URL = (process.env.SERVER_URL) ?
-  (process.env.SERVER_URL) :
-  config.get('serverURL');
+    (process.env.SERVER_URL) :
+    config.get('serverURL');
 
 // HOST_URL used for DB calls - SERVER_URL without https or https://
 const HOST_URL = config.get('hostURL');
@@ -106,8 +103,8 @@ const HOST_URL = config.get('hostURL');
 const HOTEL_NAME = config.get('hotelName');
 
 if (!(APP_SECRET && VALIDATION_TOKEN && PAGE_ACCESS_TOKEN && SERVER_URL)) {
-  console.error("Missing config values");
-  process.exit(1);
+    console.error("Missing config values");
+    process.exit(1);
 }
 
 //source: https://gist.github.com/aitoribanez/8b2d38601f6916139f5754aae5bcc15f
@@ -115,14 +112,7 @@ if (!(APP_SECRET && VALIDATION_TOKEN && PAGE_ACCESS_TOKEN && SERVER_URL)) {
 app.post("/upload", upload.array("uploads[]", 12), function (req, res) {
     console.log("console log in app.post upload", 'files', req.files);
     exports.uploadedFileName = req.files[0].filename;
-    //console.log("New file uploaded status:" + newFileUploaded);
-    newFileUploaded = true;
-    //Export value to index.js - a new file got uploaded
-    console.log("NEWFILEUPLOAD ======= >>>> app1" +  exports.newFileUploaded);
-    exports.newFileUploaded = newFileUploaded;
-    console.log("NEWFILEUPLOAD ======= >>>> app2" +  exports.newFileUploaded);
-    //console.log("New file uploaded status:" + newFileUploaded);
-    //console.log("New file uploaded status:" + newFileUploaded);
+    routes.newFileUploaded();
     res.send(req.files);
 });
 
@@ -132,14 +122,14 @@ app.post("/upload", upload.array("uploads[]", 12), function (req, res) {
  *
  */
 app.get('/webhook', function(req, res) {
-  if (req.query['hub.mode'] === 'subscribe' &&
-      req.query['hub.verify_token'] === VALIDATION_TOKEN) {
-    console.log("Validating webhook");
-    res.status(200).send(req.query['hub.challenge']);
-  } else {
-    console.error("Failed validation. Make sure the validation tokens match.");
-    res.sendStatus(403);
-  }
+    if (req.query['hub.mode'] === 'subscribe' &&
+        req.query['hub.verify_token'] === VALIDATION_TOKEN) {
+        console.log("Validating webhook");
+        res.status(200).send(req.query['hub.challenge']);
+    } else {
+        console.error("Failed validation. Make sure the validation tokens match.");
+        res.sendStatus(403);
+    }
 });
 
 /*
@@ -150,42 +140,42 @@ app.get('/webhook', function(req, res) {
  *
  */
 app.post('/webhook', function (req, res) {
-  var data = req.body;
+    var data = req.body;
 
-  // Make sure this is a page subscription
-  if (data.object == 'page') {
-    // Iterate over each entry
-    // There may be multiple if batched
-    data.entry.forEach(function(pageEntry) {
-      var pageID = pageEntry.id;
-      var timeOfEvent = pageEntry.time;
+    // Make sure this is a page subscription
+    if (data.object == 'page') {
+        // Iterate over each entry
+        // There may be multiple if batched
+        data.entry.forEach(function(pageEntry) {
+            var pageID = pageEntry.id;
+            var timeOfEvent = pageEntry.time;
 
-      // Iterate over each messaging event
-      pageEntry.messaging.forEach(function(messagingEvent) {
-        if (messagingEvent.optin) {
-          receivedAuthentication(messagingEvent);
-        } else if (messagingEvent.message) {
-          receivedMessage(messagingEvent);
-        } else if (messagingEvent.delivery) {
-          receivedDeliveryConfirmation(messagingEvent);
-        } else if (messagingEvent.postback) {
-          receivedPostback(messagingEvent);
-        } else if (messagingEvent.read) {
-          receivedMessageRead(messagingEvent);
-        } else if (messagingEvent.account_linking) {
-          receivedAccountLink(messagingEvent);
-        } else {
-          console.log("Webhook received unknown messagingEvent: ", messagingEvent);
-        }
-      });
-    });
+            // Iterate over each messaging event
+            pageEntry.messaging.forEach(function(messagingEvent) {
+                if (messagingEvent.optin) {
+                    receivedAuthentication(messagingEvent);
+                } else if (messagingEvent.message) {
+                    receivedMessage(messagingEvent);
+                } else if (messagingEvent.delivery) {
+                    receivedDeliveryConfirmation(messagingEvent);
+                } else if (messagingEvent.postback) {
+                    receivedPostback(messagingEvent);
+                } else if (messagingEvent.read) {
+                    receivedMessageRead(messagingEvent);
+                } else if (messagingEvent.account_linking) {
+                    receivedAccountLink(messagingEvent);
+                } else {
+                    console.log("Webhook received unknown messagingEvent: ", messagingEvent);
+                }
+            });
+        });
 
-    // Assume all went well.
-    //
-    // You must send back a 200, within 20 seconds, to let us know you've
-    // successfully received the callback. Otherwise, the request will time out.
-    res.sendStatus(200);
-  }
+        // Assume all went well.
+        //
+        // You must send back a 200, within 20 seconds, to let us know you've
+        // successfully received the callback. Otherwise, the request will time out.
+        res.sendStatus(200);
+    }
 });
 
 /*
@@ -194,64 +184,63 @@ app.post('/webhook', function (req, res) {
  *
  */
 app.get('/authorize', function(req, res) {
-  var accountLinkingToken = req.query.account_linking_token;
-  var redirectURI = req.query.redirect_uri;
+    var accountLinkingToken = req.query.account_linking_token;
+    var redirectURI = req.query.redirect_uri;
 
-  // Authorization Code should be generated per user by the developer. This will
-  // be passed to the Account Linking callback.
-  var authCode = "1234567890";
+    // Authorization Code should be generated per user by the developer. This will
+    // be passed to the Account Linking callback.
+    var authCode = "1234567890";
 
-  // Redirect users to this URI on successful login
-  var redirectURISuccess = redirectURI + "&authorization_code=" + authCode;
+    // Redirect users to this URI on successful login
+    var redirectURISuccess = redirectURI + "&authorization_code=" + authCode;
 
-  res.render('authorize', {
-    accountLinkingToken: accountLinkingToken,
-    redirectURI: redirectURI,
-    redirectURISuccess: redirectURISuccess
-  });
+    res.render('authorize', {
+        accountLinkingToken: accountLinkingToken,
+        redirectURI: redirectURI,
+        redirectURISuccess: redirectURISuccess
+    });
 });
 
 /*
- * Verify that the callback came from Facebook. Using the App Secret from 
- * the App Dashboard, we can verify the signature that is sent with each 
+ * Verify that the callback came from Facebook. Using the App Secret from
+ * the App Dashboard, we can verify the signature that is sent with each
  * callback in the x-hub-signature field, located in the header.
  *
  * https://developers.facebook.com/docs/graph-api/webhooks#setup
  *
  */
 function verifyRequestSignature(req, res, buf) {
-  var signature = req.headers["x-hub-signature"];
-  console.log("Req headers:");
-  console.log(req.headers);
+    var signature = req.headers["x-hub-signature"];
+    console.log("Req headers:");
+    console.log(req.headers);
     console.log("Signature:" + signature);
-  if (!signature) {
-    // For testing, let's log an error. In production, you should throw an 
-    // error.
-    console.error("Couldn't validate the signature. Line 358 app.js // Callback from Facebook. If Server URL is not the same as webhook URL on facebook");
-  } else {
-    var elements = signature.split('=');
-    var method = elements[0];
-    var signatureHash = elements[1];
+    if (!signature) {
+        // For testing, let's log an error. In production, you should throw an
+        // error.
+        console.error("Couldn't validate the signature. Line 358 app.js // Callback from Facebook. If Server URL is not the same as webhook URL on facebook");
+    } else {
+        var elements = signature.split('=');
+        var method = elements[0];
+        var signatureHash = elements[1];
 
-    var expectedHash = crypto.createHmac('sha1', APP_SECRET)
-                        .update(buf)
-                        .digest('hex');
+        var expectedHash = crypto.createHmac('sha1', APP_SECRET)
+            .update(buf)
+            .digest('hex');
 
-    if (signatureHash != expectedHash) {
-      throw new Error("Couldn't validate the request signature.");
+        if (signatureHash != expectedHash) {
+            throw new Error("Couldn't validate the request signature.");
+        }
     }
-  }
 }
 
 /*
  * Authorization Event
  *
- * The value for 'optin.ref' is defined in the entry point. For the "Send to 
- * Messenger" plugin, it is the 'data-ref' field. Read more at 
+ * The value for 'optin.ref' is defined in the entry point. For the "Send to
+ * Messenger" plugin, it is the 'data-ref' field. Read more at
  * https://developers.facebook.com/docs/messenger-platform/webhook-reference/authentication
  *
  */
-
 //Recieve authentication from wlanlandingpage when user click Send to messenger button - Send data to mongoDB database.
 function receivedAuthentication(event) {
     var senderID = event.sender.id;
@@ -302,7 +291,7 @@ function receivedAuthentication(event) {
             // to let them know it was successful.
             sendTextMessage(senderID, "Hallo " +  a.first_name + " " + a.last_name + "! Sie haben sich erfolgreich angemeldet. " +
                 "Sie erhalten nun Neuigkeiten via Facebook Messenger " +
-                "von Ihrem " + HOTEL_NAME +  " team. Viel Spaß!");
+                "von Ihrem " + HOTEL_NAME +  " Team. Viel Spaß!");
             //Additionally senderID is added to the Javascript object, which is saved to the MongoDB
             a["senderId"] = senderID;
             //User is a "angemeldeter Gast" and is able to recieve messages
@@ -315,78 +304,41 @@ function receivedAuthentication(event) {
             b = JSON.stringify(a);
         });
     });
-            // Build the post string from an object
-            reqGet.end();
-            reqGet.on('error', function (e) {
-                console.error(e);
+    // Build the post string from an object
+    reqGet.end();
+    reqGet.on('error', function (e) {
+        console.error(e);
 
     });
     setTimeout(postNewUserToDB, 15000);
 }
+
 //New User is saved in DB, function called in receivedAuthentication - send to index.js /guests REST-FUL API
 function postNewUserToDB() {
-        // An object of options to indicate where to post to
-        var post_options = {
-            //Change URL to hotelmessengertagbag.herokuapp.com if deploying
-            host: HOST_URL,
-            port: '80',
-            path: '/guests',
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json'
-            }
-        };
-
-        // Set up the request
-        var post_req = http.request(post_options, function (res) {
-            res.setEncoding('utf8');
-            res.on('data', function (chunk) {
-                console.log('Response: ' + chunk);
-            });
-        });
-
-        // post the data
-        post_req.write(b);
-        post_req.end();
-}
-//Not in use right now
-/*
-function getAnalytics(){
-    var buffer = "";
-    var a = "";
-    var optionsget = {
-        host: 'graph.facebook.com',
-        port: 443,
-        path: '/v2.8/me/insights/page_messages_active_threads_unique&access_token=' + PAGE_ACCESS_TOKEN ,
-        method: 'GET'
+    // An object of options to indicate where to post to
+    var post_options = {
+        //Change URL to hotelmessengertagbag.herokuapp.com if deploying
+        host: HOST_URL,
+        port: '80',
+        path: '/guests',
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        }
     };
 
-    console.info('Options prepared:');
-    console.info(optionsget);
-    console.info('Do the GET call');
-
-// do the GET request
-    var reqGet = https.request(optionsget, function(res) {
-        console.log("statusCode: ", res.statusCode);
-        // uncomment it for header details
-        //  console.log("headers: ", res.headers);
-
-        res.on('data', function(d) {
-            console.info('GET result:\n');
-            process.stdout.write(d);
-            buffer += d;
-            console.log(buffer);
-            a = JSON.parse(buffer);
-            console.log(a);
+    // Set up the request
+    var post_req = http.request(post_options, function (res) {
+        res.setEncoding('utf8');
+        res.on('data', function (chunk) {
+            console.log('Response: ' + chunk);
         });
     });
 
-    reqGet.end();
-    reqGet.on('error', function(e) {
-        console.error(e);
-    });
+    // post the data
+    post_req.write(b);
+    post_req.end();
 }
-*/
 
 /*
  * Message Event
@@ -432,55 +384,27 @@ function receivedMessage(event) {
         console.log("Quick reply for message %s with payload %s",
             messageId, quickReplyPayload);
 
-    if (messageText) {
-        if (autoAnswerIsOn === false) {
-            return;
-        }
-    }
+        if (messageText) {
+            // If we receive a text message, check to see if it matches any special
+            // keywords and send back the corresponding example. Otherwise, just echo
+            // the text we received.
 
-        // If we receive a text message, check to see if it matches any special
-        // keywords and send back the corresponding example. Otherwise, just echo
-        // the text we received.
+            switch (messageText) {
 
-        switch (messageText) {
+                case 'typing on':
+                    sendTypingOn(senderID);
+                    break;
 
-            case 'Menü':
-                sendMenu(senderID);
-                break;
+                case 'typing off':
+                    sendTypingOff(senderID);
+                    break;
 
-            case 'typing on':
-                sendTypingOn(senderID);
-                break;
-
-            case 'typing off':
-                sendTypingOff(senderID);
-                break;
-
-            case 'account linking':
-                sendAccountLinking(senderID);
-                break;
-
-            case 'Zimmer Anfrage':
-                sendPersonRequest(senderID);
-                break;
-
-            case 'Persönliche Beratung':
-                sendPersonalFeedback(senderID);
-                break;
-
-            case "pay":
-                sendPaymentButton(senderID);
-                break;
-
-            default:
-                /* Auto reply Menu disabled
-                 *
-                 *if (typeof quickReplyPayload === "undefined") {
-                 *   sendMenu(senderID);
-                 * }
-                 */
+                case 'account linking':
+                    sendAccountLinking(senderID);
+                    break;
             }
         }
+    }
 }
 
 //2 functions for broadcasting texts - Broadcast gesendet von Dashboard to all angemeldete Gäste
@@ -537,38 +461,37 @@ exports.sendBroadcastFile = function (recipientId, URLUploadedFile) {
     }
 };
 
-
 /*
  * Delivery Confirmation Event
  *
- * This event is sent to confirm the delivery of a message. Read more about 
+ * This event is sent to confirm the delivery of a message. Read more about
  * these fields at https://developers.facebook.com/docs/messenger-platform/webhook-reference/message-delivered
  *
  */
 function receivedDeliveryConfirmation(event) {
-  var senderID = event.sender.id;
-  var recipientID = event.recipient.id;
-  var delivery = event.delivery;
-  var messageIDs = delivery.mids;
-  var watermark = delivery.watermark;
-  var sequenceNumber = delivery.seq;
+    var senderID = event.sender.id;
+    var recipientID = event.recipient.id;
+    var delivery = event.delivery;
+    var messageIDs = delivery.mids;
+    var watermark = delivery.watermark;
+    var sequenceNumber = delivery.seq;
 
-  if (messageIDs) {
-    messageIDs.forEach(function(messageID) {
-      console.log("Received delivery confirmation for message ID: %s", 
-        messageID);
-    });
-  }
+    if (messageIDs) {
+        messageIDs.forEach(function(messageID) {
+            console.log("Received delivery confirmation for message ID: %s",
+                messageID);
+        });
+    }
 
-  console.log("All message before %d were delivered.", watermark);
+    console.log("All message before %d were delivered.", watermark);
 }
 
 /*
  * Postback Event
  *
- * This event is called when a postback is tapped on a Structured Message. 
+ * This event is called when a postback is tapped on a Structured Message.
  * https://developers.facebook.com/docs/messenger-platform/webhook-reference/postback-received
- * 
+ *
  */
 function receivedPostback(event) {
     var senderID = event.sender.id;
@@ -583,18 +506,12 @@ function receivedPostback(event) {
 
     // When a postback is called, we'll send a message back to the sender to
     // let them know it was successful
-   if (payload === "1") {
-       sendGifMessage(senderID);
-   }
-   else if (payload === "GET_STARTED_PAYLOAD") {
-       sendWelcomeMessage(senderID);
-   }    else if (payload === "Zimmer Anfrage") {
-       sendPersonRequest(senderID);
-   }    else if (payload === "personal") {
-       sendPersonalFeedback(senderID);
-   } else if (payload === "DEVELOPER_DEFINED_PAYLOAD") {
-
-   }
+    if (payload === "1") {
+        sendGifMessage(senderID);
+    }
+    else if (payload === "GET_STARTED_PAYLOAD") {
+        sendWelcomeMessage(senderID);
+    }
 }
 
 /*
@@ -602,18 +519,18 @@ function receivedPostback(event) {
  *
  * This event is called when a previously-sent message has been read.
  * https://developers.facebook.com/docs/messenger-platform/webhook-reference/message-read
- * 
+ *
  */
 function receivedMessageRead(event) {
-  var senderID = event.sender.id;
-  var recipientID = event.recipient.id;
+    var senderID = event.sender.id;
+    var recipientID = event.recipient.id;
 
-  // All messages before watermark (a timestamp) or sequence have been seen.
-  var watermark = event.read.watermark;
-  var sequenceNumber = event.read.seq;
+    // All messages before watermark (a timestamp) or sequence have been seen.
+    var watermark = event.read.watermark;
+    var sequenceNumber = event.read.seq;
 
-  console.log("Received message read event for watermark %d and sequence " +
-    "number %d", watermark, sequenceNumber);
+    console.log("Received message read event for watermark %d and sequence " +
+        "number %d", watermark, sequenceNumber);
 }
 
 /*
@@ -622,34 +539,17 @@ function receivedMessageRead(event) {
  * This event is called when the Link Account or UnLink Account action has been
  * tapped.
  * https://developers.facebook.com/docs/messenger-platform/webhook-reference/account-linking
- * 
+ *
  */
 function receivedAccountLink(event) {
-  var senderID = event.sender.id;
-  var recipientID = event.recipient.id;
+    var senderID = event.sender.id;
+    var recipientID = event.recipient.id;
 
-  var status = event.account_linking.status;
-  var authCode = event.account_linking.authorization_code;
+    var status = event.account_linking.status;
+    var authCode = event.account_linking.authorization_code;
 
-  console.log("Received account link event with for user %d with status %s " +
-    "and auth code %s ", senderID, status, authCode);
-}
-//Employee will soon take care of users request
-function sendPersonalFeedback(recipientId) {
-
-    autoAnswerIsOn = false;
-
-    var messageData = {
-        recipient: {
-            id: recipientId
-        },
-        message: {
-            text: "Es wird sich ehestmöglich einer unserer Mitarbeiter um Ihre Anfrage kümmern.",
-            metadata: "DEVELOPER_DEFINED_METADATA"
-        }
-    };
-
-    callSendAPI(messageData);
+    console.log("Received account link event with for user %d with status %s " +
+        "and auth code %s ", senderID, status, authCode);
 }
 
 /*
@@ -670,8 +570,46 @@ function sendTextMessage(recipientId, messageText) {
 
     callSendAPI(messageData);
 }
-//Function called if user signes up first time
-function sendWelcomeMessage(recipientId) {
+
+/*
+ * Turn typing indicator on
+ *
+ */
+function sendTypingOn(recipientId) {
+    console.log("Turning typing indicator on");
+
+    var messageData = {
+        recipient: {
+            id: recipientId
+        },
+        sender_action: "typing_on"
+    };
+
+    callSendAPI(messageData);
+}
+
+/*
+ * Turn typing indicator off
+ *
+ */
+function sendTypingOff(recipientId) {
+    console.log("Turning typing indicator off");
+
+    var messageData = {
+        recipient: {
+            id: recipientId
+        },
+        sender_action: "typing_off"
+    };
+
+    callSendAPI(messageData);
+}
+
+/*
+ * Send a message with the account linking call-to-action
+ *
+ */
+function sendAccountLinking(recipientId) {
     var messageData = {
         recipient: {
             id: recipientId
@@ -681,15 +619,10 @@ function sendWelcomeMessage(recipientId) {
                 type: "template",
                 payload: {
                     template_type: "button",
-                    text: "Hallo & Willkommen beim Chatbot vom Hotel Salzburger Hof Leogang - #homeofsports. Wollen Sie eine Zimmer Anfrage erstellen, oder persönlich beraten werden? Schreiben Sie oder wählen Sie aus.",
-                    buttons:[ {
-                        type: "postback",
-                        title: "Zimmer Anfrage",
-                        payload: "Zimmer Anfrage"
-                    }, {
-                        type: "postback",
-                        title: "Persönliche Beratung",
-                        payload: "personal"
+                    text: "Welcome. Link your account.",
+                    buttons:[{
+                        type: "account_link",
+                        url: SERVER_URL + "/authorize"
                     }]
                 }
             }
@@ -700,122 +633,58 @@ function sendWelcomeMessage(recipientId) {
 }
 
 /*
- * Turn typing indicator on
- *
- */
-function sendTypingOn(recipientId) {
-  console.log("Turning typing indicator on");
-
-  var messageData = {
-    recipient: {
-      id: recipientId
-    },
-    sender_action: "typing_on"
-  };
-
-  callSendAPI(messageData);
-}
-
-/*
- * Turn typing indicator off
- *
- */
-function sendTypingOff(recipientId) {
-  console.log("Turning typing indicator off");
-
-  var messageData = {
-    recipient: {
-      id: recipientId
-    },
-    sender_action: "typing_off"
-  };
-
-  callSendAPI(messageData);
-}
-
-/*
- * Send a message with the account linking call-to-action
- *
- */
-function sendAccountLinking(recipientId) {
-  var messageData = {
-    recipient: {
-      id: recipientId
-    },
-    message: {
-      attachment: {
-        type: "template",
-        payload: {
-          template_type: "button",
-          text: "Welcome. Link your account.",
-          buttons:[{
-            type: "account_link",
-            url: SERVER_URL + "/authorize"
-          }]
-        }
-      }
-    }
-  };  
-
-  callSendAPI(messageData);
-}
-
-/*
- * Call the Send API. The message data goes in the body. If successful, we'll 
- * get the message id in a response 
+ * Call the Send API. The message data goes in the body. If successful, we'll
+ * get the message id in a response
  * If Failed calling Send API a put request is made to the the REST-FUL API in index.js
  */
 function callSendAPI(messageData) {
     console.log("SEND API CALLLED <------------");
     console.log("Recipient ID: top " + messageData.recipient.id);
+    request({
+        uri: 'https://graph.facebook.com/v2.6/me/messages',
+        qs: { access_token: PAGE_ACCESS_TOKEN },
+        method: 'POST',
+        json: messageData
 
-  request({
-    uri: 'https://graph.facebook.com/v2.6/me/messages',
-    qs: { access_token: PAGE_ACCESS_TOKEN },
-    method: 'POST',
-    json: messageData
-
-  }, function (error, response, body) {
-        if (!error && response.statusCode === 200) {
+    }, function (error, response, body) {
+        if (!error && response.statusCode == 200) {
             var recipientId = body.recipient_id;
             console.log("Recipient ID:" + recipientId);
-      var messageId = body.message_id;
+            var messageId = body.message_id;
 
-      if (messageId) {
-        console.log("Successfully sent message with id %s to recipient %s", 
-          messageId, recipientId);
-          //senderIDTransfer.splice((0), senderIDTransfer.length);
-          //senderIDTransfer.push(recipientId);
-      } else {
-      console.log("Successfully called Send API for recipient %s", 
-        recipientId);
-      }
-    } else {
-      console.error("Failed calling Send API", response.statusCode, response.statusMessage, body.error);
-      //If error is because attached file can not be found, DB is not getting updated
-      var errorMsgNoDBUpdate = "Failed to fetch the file from the url";
-      var errorMsgNoDBUpdate2 = "Message cannot be empty, must provide valid attachment or text";
-      //if error message if that it Failed to fetch the file from the url, function is returned
-      if(body.error.message.indexOf(errorMsgNoDBUpdate) !== -1 || body.error.message.indexOf(errorMsgNoDBUpdate2) !== -1){
-          return;
-      }
-      console.log(messageData.recipient.id);
-      // var c is assigned to the current recipient id
-      c = messageData.recipient.id;
-      //updateDB  is called with current recipient id value -> c which is a global variable
+            if (messageId) {
+                console.log("Successfully sent message with id %s to recipient %s",
+                    messageId, recipientId);
+                //senderIDTransfer.splice((0), senderIDTransfer.length);
+                //senderIDTransfer.push(recipientId);
+            } else {
+                console.log("Successfully called Send API for recipient %s",
+                    recipientId);
+            }
+        } else {
+            console.error("Failed calling Send API", response.statusCode, response.statusMessage, body.error);
+            //If error is because attached file can not be found, DB is not getting updated
+            var errorMsgNoDBUpdate = "Failed to fetch the file from the url";
+            var errorMsgNoDBUpdate2 = "Message cannot be empty, must provide valid attachment or text";
+            //if error message if that it Failed to fetch the file from the url, function is returned
+            if(body.error.message.indexOf(errorMsgNoDBUpdate) !== -1 || body.error.message.indexOf(errorMsgNoDBUpdate2) !== -1){
+                return;
+            }
+            console.log(messageData.recipient.id);
+            // var c is assigned to the current recipient id
+            c = messageData.recipient.id;
+            //updateDB  is called with current recipient id value -> c which is a global variable
             if(recipientId) {
                 updateDB();
             }
-      //var index = senderIDTransfer.indexOf(messageData.recipient.id);
-      //console.log(index);
-      //senderIDTransfer.splice(index, 1);
-      //console.log(senderIDTransfer);
-      //Problem with c = is changed everytime the function Call send api is called - when updateDB function is called the value is the same as the call send api is called the last time
-      }
+            //var index = senderIDTransfer.indexOf(messageData.recipient.id);
+            //console.log(index);
+            //senderIDTransfer.splice(index, 1);
+            //console.log(senderIDTransfer);
+            //Problem with c = is changed everytime the function Call send api is called - when updateDB function is called the value is the same as the call send api is called the last time
+        }
     });
 }
-
-exports.callSendAPI = callSendAPI;
 
 /*
  * Send update to REST-ful API in index.js if signed-out, change signed-up field to false
@@ -823,8 +692,8 @@ exports.callSendAPI = callSendAPI;
 function updateDB(){
     console.log("updateDB function called" + c);
 
-     // An object of options to indicate where to post to
-     var put_options = {
+    // An object of options to indicate where to post to
+    var put_options = {
         //Change URL on top if deploying
         host: HOST_URL,
         port: '80',
@@ -833,19 +702,19 @@ function updateDB(){
         headers: {
             'Content-Type': 'application/x-www-form-urlencoded'
         }
-     };
+    };
 
-     // Set up the request
-     var put_req = http.request(put_options, function(res) {
+    // Set up the request
+    var put_req = http.request(put_options, function(res) {
         res.setEncoding('utf8');
         res.on('data', function (chunk) {
             console.log('Response: of successful put request - line 2540 + chunk var (deleted) //app.js 840 ');
         });
-     });
+    });
 
-     // post the data
-     put_req.write(c);
-     put_req.end();
+    // post the data
+    put_req.write(c);
+    put_req.end();
 }
 
 /*
@@ -854,7 +723,7 @@ function updateDB(){
  * certificate authority.
  */
 app.listen(app.get('port'), function() {
-  console.log('Node app is running on port', app.get('port'));
+    console.log('Node app is running on port', app.get('port'));
 });
 
 module.exports = app;

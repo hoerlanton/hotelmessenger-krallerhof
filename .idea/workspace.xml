@@ -3,6 +3,8 @@
   <component name="ChangeListManager">
     <list default="true" id="31aa1f9b-f5e8-4109-bab4-a5fc224afd25" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app.js" afterPath="$PROJECT_DIR$/app.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/client/src/app/components/dashboard/dashboard.component.ts" afterPath="$PROJECT_DIR$/client/src/app/components/dashboard/dashboard.component.ts" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/routes/index.js" afterPath="$PROJECT_DIR$/routes/index.js" />
     </list>
     <ignored path="$PROJECT_DIR$/.tmp/" />
@@ -17,18 +19,59 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="index.js" pinned="false" current-in-tab="true">
+      <file leaf-file-name="index.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/routes/index.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="103">
-              <caret line="301" column="46" lean-forward="false" selection-start-line="301" selection-start-column="46" selection-end-line="301" selection-end-column="46" />
+            <state relative-caret-position="40">
+              <caret line="296" column="42" lean-forward="false" selection-start-line="296" selection-start-column="42" selection-end-line="296" selection-end-column="42" />
               <folding>
                 <element signature="e#1303#1528#0" expanded="false" />
                 <element signature="e#1625#1859#0" expanded="false" />
                 <element signature="e#1927#2140#0" expanded="false" />
                 <element signature="e#2210#2682#0" expanded="false" />
                 <element signature="e#2748#3406#0" expanded="false" />
-                <element signature="e#15537#15685#0" expanded="false" />
+                <element signature="e#17086#17234#0" expanded="false" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="dashboard.component.css" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/client/src/app/components/dashboard/dashboard.component.css">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="183">
+              <caret line="105" column="30" lean-forward="false" selection-start-line="105" selection-start-column="30" selection-end-line="105" selection-end-column="30" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="app.js" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="240">
+              <caret line="16" column="0" lean-forward="false" selection-start-line="16" selection-start-column="0" selection-end-line="16" selection-end-column="0" />
+              <folding>
+                <element signature="e#1834#2095#0" expanded="false" />
+                <element signature="e#4105#4452#0" expanded="false" />
+                <element signature="e#4771#6279#0" expanded="false" />
+                <element signature="e#6459#7041#0" expanded="false" />
+                <element signature="n#!!block;n#verifyRequestSignature#0" expanded="false" />
+                <element signature="n#!!block;n#receivedAuthentication#0" expanded="false" />
+                <element signature="n#!!block;n#postNewUserToDB#0" expanded="false" />
+                <element signature="n#!!block;n#receivedMessage#0" expanded="false" />
+                <element signature="e#14946#15184#0" expanded="false" />
+                <element signature="e#15371#16329#0" expanded="false" />
+                <element signature="n#!!block;n#receivedDeliveryConfirmation#0" expanded="false" />
+                <element signature="n#!!block;n#receivedPostback#0" expanded="false" />
+                <element signature="n#!!block;n#receivedMessageRead#0" expanded="false" />
+                <element signature="n#!!block;n#receivedAccountLink#0" expanded="false" />
+                <element signature="n#!!block;n#sendTextMessage#0" expanded="false" />
+                <element signature="n#!!block;n#sendTypingOn#0" expanded="false" />
+                <element signature="n#!!block;n#sendTypingOff#0" expanded="false" />
+                <element signature="n#!!block;n#sendAccountLinking#0" expanded="false" />
+                <element signature="n#!!block;n#callSendAPI#0" expanded="false" />
+                <element signature="n#!!block;n#updateDB#0" expanded="false" />
               </folding>
             </state>
           </provider>
@@ -40,6 +83,18 @@
             <state relative-caret-position="197">
               <caret line="23" column="48" lean-forward="false" selection-start-line="23" selection-start-column="48" selection-end-line="23" selection-end-column="48" />
               <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="dashboard.component.ts" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/client/src/app/components/dashboard/dashboard.component.ts">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="229">
+              <caret line="101" column="5" lean-forward="true" selection-start-line="101" selection-start-column="5" selection-end-line="101" selection-end-column="5" />
+              <folding>
+                <element signature="e#0#42#0" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -85,12 +140,12 @@
         <option value="$PROJECT_DIR$/README.md" />
         <option value="$PROJECT_DIR$/client/src/app/app.module.ts" />
         <option value="$PROJECT_DIR$/client/src/polyfills.ts" />
-        <option value="$PROJECT_DIR$/app.js" />
-        <option value="$PROJECT_DIR$/client/src/app/components/dashboard/dashboard.component.ts" />
         <option value="$PROJECT_DIR$/views/wlanlandingpage.ejs" />
         <option value="$PROJECT_DIR$/config/default.json" />
         <option value="$PROJECT_DIR$/client/src/app/components/dashboard/dashboard.component.html" />
+        <option value="$PROJECT_DIR$/app.js" />
         <option value="$PROJECT_DIR$/routes/index.js" />
+        <option value="$PROJECT_DIR$/client/src/app/components/dashboard/dashboard.component.ts" />
       </list>
     </option>
   </component>
@@ -145,6 +200,41 @@
             <path>
               <item name="hotelmessenger-mama-thresl" type="b2602c69:ProjectViewProjectNode" />
               <item name="hotelmessenger-mama-thresl" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="hotelmessenger-mama-thresl" type="b2602c69:ProjectViewProjectNode" />
+              <item name="hotelmessenger-mama-thresl" type="462c0819:PsiDirectoryNode" />
+              <item name="client" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="hotelmessenger-mama-thresl" type="b2602c69:ProjectViewProjectNode" />
+              <item name="hotelmessenger-mama-thresl" type="462c0819:PsiDirectoryNode" />
+              <item name="client" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="hotelmessenger-mama-thresl" type="b2602c69:ProjectViewProjectNode" />
+              <item name="hotelmessenger-mama-thresl" type="462c0819:PsiDirectoryNode" />
+              <item name="client" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="app" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="hotelmessenger-mama-thresl" type="b2602c69:ProjectViewProjectNode" />
+              <item name="hotelmessenger-mama-thresl" type="462c0819:PsiDirectoryNode" />
+              <item name="client" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="app" type="462c0819:PsiDirectoryNode" />
+              <item name="components" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="hotelmessenger-mama-thresl" type="b2602c69:ProjectViewProjectNode" />
+              <item name="hotelmessenger-mama-thresl" type="462c0819:PsiDirectoryNode" />
+              <item name="client" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="app" type="462c0819:PsiDirectoryNode" />
+              <item name="components" type="462c0819:PsiDirectoryNode" />
+              <item name="dashboard" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="hotelmessenger-mama-thresl" type="b2602c69:ProjectViewProjectNode" />
@@ -216,12 +306,12 @@
       <workItem from="1502473309984" duration="578000" />
       <workItem from="1502474470940" duration="2517000" />
       <workItem from="1502477652240" duration="1692000" />
-      <workItem from="1502623508793" duration="75000" />
+      <workItem from="1502623508793" duration="902000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="55283000" />
+    <option name="totallyTimeSpent" value="56110000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -236,6 +326,7 @@
     <frame x="0" y="23" width="1280" height="773" extended-state="6" />
     <editor active="true" />
     <layout>
+      <window_info id="TypeScript" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32890856" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.20969023" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32890856" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
@@ -249,7 +340,6 @@
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
-      <window_info id="TypeScript" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32890856" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
       <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
@@ -291,6 +381,28 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="1785">
           <caret line="119" column="34" lean-forward="true" selection-start-line="119" selection-start-column="34" selection-end-line="119" selection-end-column="34" />
+          <folding>
+            <element signature="e#1834#2095#0" expanded="false" />
+            <element signature="e#4105#4452#0" expanded="false" />
+            <element signature="e#4771#6279#0" expanded="false" />
+            <element signature="e#6459#7041#0" expanded="false" />
+            <element signature="n#!!block;n#verifyRequestSignature#0" expanded="false" />
+            <element signature="n#!!block;n#receivedAuthentication#0" expanded="false" />
+            <element signature="n#!!block;n#postNewUserToDB#0" expanded="false" />
+            <element signature="n#!!block;n#receivedMessage#0" expanded="false" />
+            <element signature="e#14946#15184#0" expanded="false" />
+            <element signature="e#15371#16329#0" expanded="false" />
+            <element signature="n#!!block;n#receivedDeliveryConfirmation#0" expanded="false" />
+            <element signature="n#!!block;n#receivedPostback#0" expanded="false" />
+            <element signature="n#!!block;n#receivedMessageRead#0" expanded="false" />
+            <element signature="n#!!block;n#receivedAccountLink#0" expanded="false" />
+            <element signature="n#!!block;n#sendTextMessage#0" expanded="false" />
+            <element signature="n#!!block;n#sendTypingOn#0" expanded="false" />
+            <element signature="n#!!block;n#sendTypingOff#0" expanded="false" />
+            <element signature="n#!!block;n#sendAccountLinking#0" expanded="false" />
+            <element signature="n#!!block;n#callSendAPI#0" expanded="false" />
+            <element signature="n#!!block;n#updateDB#0" expanded="false" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -305,6 +417,28 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="1665">
           <caret line="111" column="27" lean-forward="false" selection-start-line="111" selection-start-column="12" selection-end-line="111" selection-end-column="27" />
+          <folding>
+            <element signature="e#1834#2095#0" expanded="false" />
+            <element signature="e#4105#4452#0" expanded="false" />
+            <element signature="e#4771#6279#0" expanded="false" />
+            <element signature="e#6459#7041#0" expanded="false" />
+            <element signature="n#!!block;n#verifyRequestSignature#0" expanded="false" />
+            <element signature="n#!!block;n#receivedAuthentication#0" expanded="false" />
+            <element signature="n#!!block;n#postNewUserToDB#0" expanded="false" />
+            <element signature="n#!!block;n#receivedMessage#0" expanded="false" />
+            <element signature="e#14946#15184#0" expanded="false" />
+            <element signature="e#15371#16329#0" expanded="false" />
+            <element signature="n#!!block;n#receivedDeliveryConfirmation#0" expanded="false" />
+            <element signature="n#!!block;n#receivedPostback#0" expanded="false" />
+            <element signature="n#!!block;n#receivedMessageRead#0" expanded="false" />
+            <element signature="n#!!block;n#receivedAccountLink#0" expanded="false" />
+            <element signature="n#!!block;n#sendTextMessage#0" expanded="false" />
+            <element signature="n#!!block;n#sendTypingOn#0" expanded="false" />
+            <element signature="n#!!block;n#sendTypingOff#0" expanded="false" />
+            <element signature="n#!!block;n#sendAccountLinking#0" expanded="false" />
+            <element signature="n#!!block;n#callSendAPI#0" expanded="false" />
+            <element signature="n#!!block;n#updateDB#0" expanded="false" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -341,6 +475,9 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="900">
           <caret line="68" column="0" lean-forward="false" selection-start-line="68" selection-start-column="0" selection-end-line="68" selection-end-column="0" />
+          <folding>
+            <element signature="e#0#42#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -375,7 +512,7 @@
             <element signature="e#1927#2140#0" expanded="false" />
             <element signature="e#2210#2682#0" expanded="false" />
             <element signature="e#2748#3406#0" expanded="false" />
-            <element signature="e#15537#15685#0" expanded="false" />
+            <element signature="e#17086#17234#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -384,6 +521,28 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="1665">
           <caret line="111" column="27" lean-forward="false" selection-start-line="111" selection-start-column="12" selection-end-line="111" selection-end-column="27" />
+          <folding>
+            <element signature="e#1834#2095#0" expanded="false" />
+            <element signature="e#4105#4452#0" expanded="false" />
+            <element signature="e#4771#6279#0" expanded="false" />
+            <element signature="e#6459#7041#0" expanded="false" />
+            <element signature="n#!!block;n#verifyRequestSignature#0" expanded="false" />
+            <element signature="n#!!block;n#receivedAuthentication#0" expanded="false" />
+            <element signature="n#!!block;n#postNewUserToDB#0" expanded="false" />
+            <element signature="n#!!block;n#receivedMessage#0" expanded="false" />
+            <element signature="e#14946#15184#0" expanded="false" />
+            <element signature="e#15371#16329#0" expanded="false" />
+            <element signature="n#!!block;n#receivedDeliveryConfirmation#0" expanded="false" />
+            <element signature="n#!!block;n#receivedPostback#0" expanded="false" />
+            <element signature="n#!!block;n#receivedMessageRead#0" expanded="false" />
+            <element signature="n#!!block;n#receivedAccountLink#0" expanded="false" />
+            <element signature="n#!!block;n#sendTextMessage#0" expanded="false" />
+            <element signature="n#!!block;n#sendTypingOn#0" expanded="false" />
+            <element signature="n#!!block;n#sendTypingOff#0" expanded="false" />
+            <element signature="n#!!block;n#sendAccountLinking#0" expanded="false" />
+            <element signature="n#!!block;n#callSendAPI#0" expanded="false" />
+            <element signature="n#!!block;n#updateDB#0" expanded="false" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -420,6 +579,9 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="1020">
           <caret line="68" column="0" lean-forward="false" selection-start-line="68" selection-start-column="0" selection-end-line="68" selection-end-column="0" />
+          <folding>
+            <element signature="e#0#42#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -454,7 +616,7 @@
             <element signature="e#1927#2140#0" expanded="false" />
             <element signature="e#2210#2682#0" expanded="false" />
             <element signature="e#2748#3406#0" expanded="false" />
-            <element signature="e#15537#15685#0" expanded="false" />
+            <element signature="e#17086#17234#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -463,6 +625,28 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="195">
           <caret line="13" column="29" lean-forward="true" selection-start-line="13" selection-start-column="29" selection-end-line="13" selection-end-column="29" />
+          <folding>
+            <element signature="e#1834#2095#0" expanded="false" />
+            <element signature="e#4105#4452#0" expanded="false" />
+            <element signature="e#4771#6279#0" expanded="false" />
+            <element signature="e#6459#7041#0" expanded="false" />
+            <element signature="n#!!block;n#verifyRequestSignature#0" expanded="false" />
+            <element signature="n#!!block;n#receivedAuthentication#0" expanded="false" />
+            <element signature="n#!!block;n#postNewUserToDB#0" expanded="false" />
+            <element signature="n#!!block;n#receivedMessage#0" expanded="false" />
+            <element signature="e#14946#15184#0" expanded="false" />
+            <element signature="e#15371#16329#0" expanded="false" />
+            <element signature="n#!!block;n#receivedDeliveryConfirmation#0" expanded="false" />
+            <element signature="n#!!block;n#receivedPostback#0" expanded="false" />
+            <element signature="n#!!block;n#receivedMessageRead#0" expanded="false" />
+            <element signature="n#!!block;n#receivedAccountLink#0" expanded="false" />
+            <element signature="n#!!block;n#sendTextMessage#0" expanded="false" />
+            <element signature="n#!!block;n#sendTypingOn#0" expanded="false" />
+            <element signature="n#!!block;n#sendTypingOff#0" expanded="false" />
+            <element signature="n#!!block;n#sendAccountLinking#0" expanded="false" />
+            <element signature="n#!!block;n#callSendAPI#0" expanded="false" />
+            <element signature="n#!!block;n#updateDB#0" expanded="false" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -482,13 +666,6 @@
       </provider>
     </entry>
     <entry file="file://$USER_HOME$/escaped_key.txt" />
-    <entry file="file://$PROJECT_DIR$/client/src/app/components/dashboard/dashboard.component.css">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="183">
-          <caret line="105" column="30" lean-forward="false" selection-start-line="105" selection-start-column="30" selection-end-line="105" selection-end-column="30" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/client/src/index.html">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
@@ -601,13 +778,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="362">
-          <caret line="821" column="3" lean-forward="false" selection-start-line="821" selection-start-column="3" selection-end-line="821" selection-end-column="3" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/client/public/index.html">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
@@ -615,17 +785,62 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/client/src/app/components/dashboard/dashboard.component.ts">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="335">
-          <caret line="96" column="43" lean-forward="false" selection-start-line="96" selection-start-column="43" selection-end-line="96" selection-end-column="43" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/views/wlanlandingpage.ejs">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="510">
           <caret line="34" column="123" lean-forward="false" selection-start-line="34" selection-start-column="123" selection-end-line="34" selection-end-column="187" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="240">
+          <caret line="16" column="0" lean-forward="false" selection-start-line="16" selection-start-column="0" selection-end-line="16" selection-end-column="0" />
+          <folding>
+            <element signature="e#1834#2095#0" expanded="false" />
+            <element signature="e#4105#4452#0" expanded="false" />
+            <element signature="e#4771#6279#0" expanded="false" />
+            <element signature="e#6459#7041#0" expanded="false" />
+            <element signature="n#!!block;n#verifyRequestSignature#0" expanded="false" />
+            <element signature="n#!!block;n#receivedAuthentication#0" expanded="false" />
+            <element signature="n#!!block;n#postNewUserToDB#0" expanded="false" />
+            <element signature="n#!!block;n#receivedMessage#0" expanded="false" />
+            <element signature="e#14946#15184#0" expanded="false" />
+            <element signature="e#15371#16329#0" expanded="false" />
+            <element signature="n#!!block;n#receivedDeliveryConfirmation#0" expanded="false" />
+            <element signature="n#!!block;n#receivedPostback#0" expanded="false" />
+            <element signature="n#!!block;n#receivedMessageRead#0" expanded="false" />
+            <element signature="n#!!block;n#receivedAccountLink#0" expanded="false" />
+            <element signature="n#!!block;n#sendTextMessage#0" expanded="false" />
+            <element signature="n#!!block;n#sendTypingOn#0" expanded="false" />
+            <element signature="n#!!block;n#sendTypingOff#0" expanded="false" />
+            <element signature="n#!!block;n#sendAccountLinking#0" expanded="false" />
+            <element signature="n#!!block;n#callSendAPI#0" expanded="false" />
+            <element signature="n#!!block;n#updateDB#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/routes/index.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="40">
+          <caret line="296" column="42" lean-forward="false" selection-start-line="296" selection-start-column="42" selection-end-line="296" selection-end-column="42" />
+          <folding>
+            <element signature="e#1303#1528#0" expanded="false" />
+            <element signature="e#1625#1859#0" expanded="false" />
+            <element signature="e#1927#2140#0" expanded="false" />
+            <element signature="e#2210#2682#0" expanded="false" />
+            <element signature="e#2748#3406#0" expanded="false" />
+            <element signature="e#17086#17234#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/client/src/app/components/dashboard/dashboard.component.css">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="183">
+          <caret line="105" column="30" lean-forward="false" selection-start-line="105" selection-start-column="30" selection-end-line="105" selection-end-column="30" />
           <folding />
         </state>
       </provider>
@@ -638,17 +853,12 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/routes/index.js">
+    <entry file="file://$PROJECT_DIR$/client/src/app/components/dashboard/dashboard.component.ts">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="103">
-          <caret line="301" column="46" lean-forward="false" selection-start-line="301" selection-start-column="46" selection-end-line="301" selection-end-column="46" />
+        <state relative-caret-position="229">
+          <caret line="101" column="5" lean-forward="true" selection-start-line="101" selection-start-column="5" selection-end-line="101" selection-end-column="5" />
           <folding>
-            <element signature="e#1303#1528#0" expanded="false" />
-            <element signature="e#1625#1859#0" expanded="false" />
-            <element signature="e#1927#2140#0" expanded="false" />
-            <element signature="e#2210#2682#0" expanded="false" />
-            <element signature="e#2748#3406#0" expanded="false" />
-            <element signature="e#15537#15685#0" expanded="false" />
+            <element signature="e#0#42#0" expanded="true" />
           </folding>
         </state>
       </provider>
