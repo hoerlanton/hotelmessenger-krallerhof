@@ -96,7 +96,7 @@ export class DashboardComponent implements OnInit {
             .map(files => files.json()).map(res =>
             // 1st parameter is a flash message text
             // 2nd parameter is optional. You can pass object with options.
-            this._flashMessagesService.show('Datei wird angehängt. Einen Moment bitte ... Sobald diese Meldung verschwindet ist der Upload fertig', { cssClass: 'alert-success', timeout: 20000 }),
+            this._flashMessagesService.show('Datei wurde angehängt und ist zum versenden bereit ...', { cssClass: 'alert-success', timeout: 20000 }),
         )
             .subscribe(files => console.log('files', files));
     }

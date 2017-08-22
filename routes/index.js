@@ -10,8 +10,8 @@ const
     mongojs = require('mongojs'),
     db = mongojs('mongodb://anton:b2d4f6h8@ds127132.mlab.com:27132/servicio', ['mamaThreslMessages', 'mamaThreslGaeste', 'mamaThreslScheduledMessages']),
     config = require('config'),
-    cron = require('node-cron'),
-    CronJob = require('cron').CronJob;
+    CronJob = require('cron').CronJob,
+    moment = require('moment-timezone');
 
 // HOST_URL used for DB calls - SERVER_URL without https or https://
 const HOST_URL = config.get('hostURL');
@@ -27,15 +27,18 @@ router.use(cors());
 
 //Global variables
 var errMsg = "";
+//New file uploaded is initially set to false
 var newFileUploaded = false;
+//Temp array of gaeste sender ids for sending message
 var gaesteGlobalSenderID =[];
-var broadcast = "";
+//Variables for cornjob
 var dateNowFormatted = "";
 var dateReqFormatted = "";
 var dateDay = "";
 var dateMonth = "";
 var dateHour = "";
 var dateMinute = "";
+var broadcast = "";
 
 //----->REST-FUL API<------//
 
@@ -122,22 +125,30 @@ router.newFileUploaded = function () {
 
 //Post message to guests
 router.post('/guestsMessage', function(req, res, next) {
-    console.log("######## 2 Post request made to /guestsMessage");
-
+    console.log("#####----### 2 Post request made to /guestsMessage");
+    //message extracted
     var message = req.body;
+    var senf = JSON.stringify(message);
+    console.log("Message Test:" );
+    console.log(senf);
+    //Date from now
     var dateNow = new Date();
     var dateString = JSON.stringify(dateNow);
     dateNowFormatted = dateString.slice(1, 17);
+    //Date from message request
     dateReqFormatted = req.body.date.slice(0, 16);
     dateDay = req.body.date.slice(8, 10);
     dateMonth = req.body.date.slice(3, 7);
     dateHour = req.body.date.slice(15, 18);
     dateMinute = req.body.date.slice(19, 21);
     broadcast = req.body.text;
+    //Get uploaded file name from upload post function line app.js 114
     var uploadedFileName = sourceFile.uploadedFileName;
+    var updateMessageObjectUploadedFile = { uploaded_file: uploadedFileName };
+    console.log("updateMessageObjectUploadedFile:" + JSON.stringify(updateMessageObjectUploadedFile));
     //Destination URL for uploaded files
     var URLUploadedFile = String(config.get('serverURL') + "/uploads/" + uploadedFileName);
-
+    //Find all senderids from signed_up guests abd push it to the temporary array gaesteGlobalSenderID
     db.mamaThreslGaeste.find(function (err, gaeste) {
         if (err) {
             errMsg = "Das senden der Nachricht ist nicht möglich. Es sind keine Gäste angemeldet.";
@@ -150,55 +161,65 @@ router.post('/guestsMessage', function(req, res, next) {
             }
             setTimeout(function () {
                 console.log(dateReqFormatted + "=" + dateNowFormatted);
-                //If message is not send at least 1 min later than now, schedule event is not fired
+                //If message is send at least 1 min later than now, schedule event is fired
                 if (dateReqFormatted !== dateNowFormatted) {
                     console.log("scheduled event fired!");
-                    //Save Message to DB
-                    db.mamaThreslScheduledMessages.save(message, function (err, message) {
-                        console.log("scheduleMessage saved: " + message.text + " " + message.date);
-                        if (err) {
-                            res.send(err);
-                        }
-                        res.json(message);
-                    });
+                    //Save scheduled Message to db
 
-                    if (uploadedFileName !== undefined && newFileUploaded === true) {
+                    if (uploadedFileName !== undefined && newFileUploaded === true && uploadedFileName !== "undefined") {
+                        var scheduledMessageUpdated = Object.assign(message, updateMessageObjectUploadedFile);
+                        console.log("scheduleMessage updated: " + scheduledMessageUpdated.text + " " + scheduledMessageUpdated.date +  " " + scheduledMessageUpdated.uploaded_file);
 
-                        db.mamaThreslScheduledMessages.update({
-                                text: message.text
-                            },
-                            {
-                                $set: {uploaded_file: uploadedFileName}
-                            }, {multi: true}, function (err, message) {
+                        setTimeout(function() {
+                            db.mamaThreslScheduledMessages.save(scheduledMessageUpdated, function (err, scheduledMessageUpdated) {
+                                console.log("scheduleMessageUpdated saved: " + scheduledMessageUpdated.text + " " + scheduledMessageUpdated.date +  " " + scheduledMessageUpdated.uploaded_file);
                                 if (err) {
-                                    console.log("error: " + err);
-                                } else {
-                                    console.log("Updated successfully, scheduled messages var (deleted)");
+                                    res.send(err);
                                 }
+                                res.json(scheduledMessageUpdated);
                             });
+                        }, 3000);
+                    } else {
+                        setTimeout(function() {
+                            db.mamaThreslScheduledMessages.save(message, function (err, message) {
+                                console.log("scheduleMessage saved: " + message.text + " " + message.date);
+                                if (err) {
+                                    res.send(err);
+                                }
+                                res.json(message);
+                            });
+                        }, 3000);
                     }
+
+                    //If there is a file uploaded, update message in db
+                    console.log("######Uploadedfilename line 170");
+                    console.log(uploadedFileName);
+                    console.log("######newFileUploaded line 172");
+                    console.log(newFileUploaded);
+                    //https://github.com/kelektiv/node-cron
+                    //Cronjob is created
                     var job = new CronJob({
+                        //Global variables from the message sent are set as the crontime property
                         cronTime: "00 " + dateMinute + " " + dateHour + " " + dateDay + " " + dateMonth + " *",
                         onTick: function () {
                             console.log("00 " + dateMinute + " " + dateHour + " " + dateDay + " " + dateMonth + " *");
                             console.log('job ticked');
                             console.log(gaesteGlobalSenderID + " " + broadcast);
                             console.log("guestsMessages get called");
-                            //Get guests from Mongo DB
 
                             //https://stackoverflow.com/questions/5643321/how-to-make-remote-rest-call-inside-node-js-any-curl
+                            //Get scheduled messages from db
                             var buffer = "";
                             var optionsget = {
                                 host: HOST_URL,
                                 path: '/guestsScheduledMessages',
                                 method: 'GET'
                             };
-
                             console.info('Options prepared:');
                             console.info(optionsget);
                             console.info('Do the GET call');
 
-                            // do the GET request to retrieve data from the user's graph API
+                            //Do the GET request to retrieve scheduled messages from the db
                             var reqGet = https.request(optionsget, function (res) {
                                 console.log("statusCode: ", res.statusCode);
                                 // uncomment it for header details
@@ -206,16 +227,15 @@ router.post('/guestsMessage', function(req, res, next) {
 
                                 res.on('data', function (d) {
                                     console.info('GET result:\n');
-                                    //process.stdout.write(d);
                                     buffer += d;
-                                    //console.log(buffer);
+                                    //scheduled message is stored in bufferObject
                                     var bufferObject = JSON.parse(buffer);
-
-                                    //console.log(bufferObject);
+                                    //data is retrieved from job.cronTime property
                                     var crontTimeString = job.cronTime.toString();
                                     var cronTimeSplitted = crontTimeString.split(" ");
-
-                                    console.log("jobcrontime splitted: " + cronTimeSplitted);
+                                    for(var w = 0; w < cronTimeSplitted.length; w++) {
+                                        console.log(cronTimeSplitted[w]);
+                                    }
 
                                     var minutes = cronTimeSplitted[1];
                                     if (minutes.length === 1) {
@@ -231,38 +251,36 @@ router.post('/guestsMessage', function(req, res, next) {
                                     }
                                     var monthNumber = cronTimeSplitted[4];
 
-                                    console.log("---->>>monthnumber" + monthNumber);
-
-                                    var monthNames = ["Jan", "Feb", "Mar", "Apr", "May", "Jun",
-                                        "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
+                                    var monthNames = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
 
                                     var month = monthNames[monthNumber];
 
-                                    console.log("---->>>month" + monthNames[monthNumber]);
-                                    //Filter the right message
+                                    //Regex is the added variables from the cronbJob job.crontime property
                                     var regex = String(month + " " + day + " 2017 " + hour + ":" + minutes);
                                     console.log("---->regex:"+regex);
-
+                                    //Messages from stored scheduled messages stored in rightmessage variable
                                     for (var m = 0; m < bufferObject.length; m++) {
                                         var rightMessage = bufferObject[m];
-                                        //console.log(rightMessage.date);
-                                        //console.log("rightmessage ohne date:" + rightMessage);
+                                        //If the rightmessage date property is the same as from the cron job property stored in the regex variable
                                         if (rightMessage.date.indexOf(regex) !== -1) {
                                             console.log("HHHH:" + rightMessage.date + rightMessage.text);
+                                            //Send out to all signed up people the the text property of the right scheduled message
                                             for (var l = 0; l < gaesteGlobalSenderID.length; l++) {
                                                 sourceFile.sendBroadcast(gaesteGlobalSenderID[l], rightMessage.text);
+                                                //And if there exists a uploaded_file property, send out to all signed up people the the text property of the right scheduled message
                                                 if (rightMessage.uploaded_file) {
                                                     console.log("URLUploadedFile:" + URLUploadedFile);
                                                     console.log("rightMessage.uploadedfile: " + rightMessage.uploaded_file);
                                                     sourceFile.sendBroadcastFile(gaesteGlobalSenderID[l], SERVER_URL + "/uploads/" + rightMessage.uploaded_file);
                                                 }
                                             }
+                                            //Now the message object in the db is update that it is in the past - now it is displayed in white in the user interface
                                             db.mamaThreslScheduledMessages.update({
                                                     text: rightMessage.text
                                                 },
                                                 {
                                                     $set: {isInThePast: true}
-                                                }, {multi: true}, function (err, message) {
+                                                }, {multi: true}, function (err, messageUpdated) {
                                                     if (err) {
                                                         console.log("error: " + err);
                                                     } else {
@@ -282,37 +300,42 @@ router.post('/guestsMessage', function(req, res, next) {
                         start: false,
                         timeZone: 'Europe/Berlin'
                     });
-                    job.start(); // job 1 started
+                    console.log("job variable: " + String(job.cronTime));
+                    //Start the job
+                    job.start();
+                    console.log("job variable: " + String(job.cronTime));
                 } else {
                     for (var j = 0; j < gaesteGlobalSenderID.length; j++) {
                         console.log("gaesteGlobalSenderID: line 166 - " + gaesteGlobalSenderID[j]);
                         sourceFile.sendBroadcast(gaesteGlobalSenderID[j], broadcast);
                     }
-                    //Save Message to DB
-                    db.mamaThreslMessages.save(message, function (err, message) {
-                        console.log("Message saved: " + message.text + " " + message.date);
-                        if (err) {
-                            res.send(err);
-                        }
-                        res.json(message);
-                    });
 
-                    console.log("######## 3 newFileUploaded is " + newFileUploaded);
-                    if (uploadedFileName !== undefined && newFileUploaded === true) {
+                    if (uploadedFileName !== undefined && newFileUploaded === true && uploadedFileName !== "undefined") {
+                        var messageUpdated = Object.assign(message, updateMessageObjectUploadedFile);
+                        console.log("Message updated: " + messageUpdated.text + " " + messageUpdated.date + " " + messageUpdated.uploaded_file);
 
-                        db.mamaThreslMessages.update({
-                                text: message.text,
-                                date: message.date
-                            },
-                            {
-                                $set: {uploaded_file: uploadedFileName}
-                            }, {multi: true}, function (err, message) {
+                        setTimeout(function () {
+                            db.mamaThreslMessages.save(messageUpdated, function (err, messageUpdated) {
+                                console.log("MessageUpdated saved: " + messageUpdated.text + " " + messageUpdated.date + " " + messageUpdated.uploaded_file);
                                 if (err) {
-                                    console.log("error: " + err);
-                                } else {
-                                    console.log("Updated successfully, messages var (deleted)");
+                                    res.send(err);
                                 }
+                                res.json(messageUpdated);
                             });
+                        }, 3000);
+
+                    } if (newFileUploaded === false) {
+                        setTimeout(function () {
+                            db.mamaThreslMessages.save(message, function (err, message) {
+                                console.log("Message saved: " + message.text + " " + message.date);
+                                if (err) {
+                                    res.send(err);
+                                }
+                                res.json(message);
+                            });
+                        }, 3000);
+                    }
+                    setTimeout(function() {
 
                         var bufferMessages = "";
                         var optionsget = {
@@ -356,16 +379,16 @@ router.post('/guestsMessage', function(req, res, next) {
                         reqGet.on('error', function (e) {
                             console.error("Error line 450:" + e);
                         });
-                    }
+                    }, 5000);
                 }
                 errMsg = "";
 
-            }, 5000);
+            }, 1000);
         }
     });
     setTimeout(function() {
         newFileUploaded = false;
-    }, 15000);
+    }, 2000);
 });
 
 //Get W-Lan-landingpage
