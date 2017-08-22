@@ -20,10 +20,10 @@ export class DashboardComponent implements OnInit {
     title: string;
     dateGenerated: any;
     filesToUpload: Array<File> = [];
-    scheduledDate: Date = new Date(2016, 5, 10);
+    scheduledDate: Date = new Date(2017, 1, 1);
     scheduledMessages: Messages[];
     datepickerOpts = {
-        startDate: new Date(2016, 5, 10),
+        startDate: new Date(2017, 1, 1),
         autoclose: true,
         todayBtn: 'linked',
         todayHighlight: true,
