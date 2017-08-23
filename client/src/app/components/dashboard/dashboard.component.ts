@@ -57,6 +57,11 @@ export class DashboardComponent implements OnInit {
             text: this.title,
             date: this.scheduledDate.toString(),
         };
+        if (scheduledMessage.text === undefined) {
+            this._flashMessagesService.show('Die Nachricht ist leer ... ',
+                { cssClass: 'alert-danger', timeout: 20000 });
+            return;
+        }
         console.log(scheduledMessage);
 
         this.dashboardService.scheduleMessage(scheduledMessage)
@@ -73,6 +78,11 @@ export class DashboardComponent implements OnInit {
             text: this.title,
             date: this.dateGenerated
         };
+        if (newMessage.text === undefined) {
+            this._flashMessagesService.show('Die Nachricht ist leer ... ',
+                { cssClass: 'alert-danger', timeout: 20000 });
+            return;
+        }
         console.log(newMessage);
 
         this.dashboardService.sendMessage(newMessage)
@@ -89,14 +99,19 @@ export class DashboardComponent implements OnInit {
     upload() {
         const formData: any = new FormData();
         const files: Array<File> = this.filesToUpload;
-
+        if (files[0] === undefined) {
+            this._flashMessagesService.show('Es wurde keine Datei ausgewählt ... ',
+                { cssClass: 'alert-danger', timeout: 20000 });
+            return;
+        }
         formData.append('uploads[]', files[0], files[0]['name']);
-
+        console.log(formData);
         this.http.post('/upload', formData)
             .map(files => files.json()).map(res =>
             // 1st parameter is a flash message text
             // 2nd parameter is optional. You can pass object with options.
-            this._flashMessagesService.show('Datei wurde angehängt und ist zum versenden bereit ...', { cssClass: 'alert-success', timeout: 20000 }),
+            this._flashMessagesService.show('Datei wurde angehängt und ist zum versenden bereit ... ',
+                { cssClass: 'alert-success', timeout: 20000 }),
         )
             .subscribe(files => console.log('files', files));
     }

@@ -50,7 +50,8 @@
             <div class="row1">
                 <div *ngFor="let guest of guests">
                     <div class="card" *ngIf="!guest.signed_up">
-                        <img src="{{guest.profile_pic}}" style="width: 60px;height: 60px;position: relative;border-radius: 50%;margin: 5px; margin-left: 60%;">
+                        <img *ngIf="guest.profile_pic" src="{{guest.profile_pic}}" style="width: 60px;height: 60px;position: relative;border-radius: 50%;margin: 5px; margin-left: 60%;">
+                        <img *ngIf="guest.profile_pic===undefined" src="http://servicio.io/wp-content/uploads/2017/08/profile-icon-9-2.png" style="width: 60px;height: 60px;position: relative;border-radius: 50%;margin: 5px; margin-left: 60%;">
                         <p><b>Name:</b> {{guest.first_name + " "}}{{guest.last_name}}<br>
                             <b>Geschlecht:</b> {{guest.gender}}<br>
                             <b>Heimat:</b> {{guest.locale}}<br>
